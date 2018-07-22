@@ -1,0 +1,19 @@
+/*Category*/
+.hide-me{
+    display: none;
+}
+
+/*Form create Product*/
+.imageThumb, .imageThumbs {
+    max-height: 100px;
+    border: 2px solid;
+    margin: 10px 10px 0 0;
+    padding: 1px;
+}
+.modal-content{
+    width: 110%;
+}
+.color-toggle{
+    background-color: #b4dbed;
+    color: #ffffff;
+}

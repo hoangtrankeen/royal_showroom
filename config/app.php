@@ -177,6 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Royal Service
+        App\Providers\RoyalHtmlServiceProvider::class,
+
     ],
 
     /*
@@ -226,6 +229,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        //Royal Alias
+        'RenderHtml' => App\Helpers\Royal\RenderHtml::class,
     ],
 
 ];

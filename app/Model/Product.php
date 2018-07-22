@@ -1,16 +1,20 @@
 <?php
 
 namespace App\Model;
-
-use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     protected $table = 'products';
 
-    //path to save images
-    public $photo_path = 'media/products';
+    protected $fillable = ['name', 'sku','slug','price','quantity','details','description','featured',
+        'visibility','active','in_stock','images','sort_order','type_id'];
+
+
+    protected $type_id = [
+        'simple',
+        'group'
+    ];
 
     public function categories()
     {
@@ -27,9 +31,9 @@ class Product extends Model
         return $this->belongsToMany('App\Model\AttributeValue', 'product_attribute', 'product_id', 'attribute_value_id')->withPivot('status');
     }
 
-    public function presentPrice()
+    public function orders()
     {
-        return ( $this->price );
+        return $this->belongsToMany('App\Model\Order');
     }
 
     public function scopeMightAlsoLike($query)
@@ -40,7 +44,6 @@ class Product extends Model
     public static function getSimpleProduct()
     {
         return Product::where('type_id', 'simple')->get();
-
     }
 
     public static function getGroupProduct()
@@ -48,24 +51,21 @@ class Product extends Model
         return Product::where('type_id', 'group')->get();
     }
 
-    public static function getAllProduct()
+    public function getActiveProduct($paginate)
     {
         $product =  Product::where('active',true)
-            ->where('visibility',true)
-            ->orderBy('name')
-            ->paginate(9);
-
+            ->orderBy('order')
+            ->paginate($paginate);
         return $product;
+    }
+
+    public function getAllProduct()
+    {
+        return Product::all();
     }
 
     public static function getFinalPrice($product)
     {
         return $product->price;
     }
-
-    public function orders()
-    {
-        return $this->belongsToMany('App\Model\Order');
-    }
-
 }
