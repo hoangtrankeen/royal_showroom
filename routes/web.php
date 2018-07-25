@@ -30,6 +30,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth:admin'], function () {
 
     Route::get('product/create/{type}','Backend\ProductController@create')->name('product.create');
     Route::resource('product-simple','Backend\ProductSimpleController');
+    Route::resource('product-group','Backend\ProductGroupController');
     Route::resource('product','Backend\ProductController');
 
     Route::resource('category','Backend\CategoryController');

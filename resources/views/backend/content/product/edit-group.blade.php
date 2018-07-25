@@ -36,17 +36,6 @@
         <div class="col-md-12 col-xs-12">
             <div class="box-content">
                 <h4 class="box-title">Chỉnh sửa nhóm sản phẩm</h4>
-                <div class="dropdown js__drop_down">
-                    <a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-                    <ul class="sub-menu">
-                        {{--<li><a href="#">Action</a></li>--}}
-                        {{--<li><a href="#">Another action</a></li>--}}
-                        {{--<li><a href="#">Something else there</a></li>--}}
-                        {{--<li class="split"></li>--}}
-                        {{--<li><a href="#">Separated link</a></li>--}}
-                    </ul>
-                    <!-- /.sub-menu -->
-                </div>
                 <!-- /.box-title -->
                 <div class="card-content">
                     <form class="form-horizontal" action="{{route('product-group.update', $product->id)}}" id="product" enctype="multipart/form-data" method="post">
@@ -143,23 +132,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="images" class="col-sm-2 control-label">Ảnh nổi bật</label>
-                            <div class=" col-xs-8">
-                                <input type="file" name="image" id="file" />
-                                <img class="imageThumb" id="imageThumb" src="{{getFeaturedImageProduct($product->image)}}">
-                            </div>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="images" class="col-sm-2 control-label">Ảnh phụ</label>
+                            <label for="images" class="col-sm-2 control-label">Ảnh</label>
                             <div class=" col-xs-8">
                                 <input type="file" name="images[]" multiple  id="files" />
-                                @if($product->images)
-                                    @foreach(json_decode($product->images) as $image)
-                                        <img class="imageThumb" id="imageThumbs" src="{{getFeaturedImageProduct($image)}}">
+                                    @foreach(getAllProductImages($product->images) as $image)
+                                        <img class="imageThumb" id="imageThumbs" src="{{$image}}">
                                     @endforeach
-                                @endif
                             </div>
                         </div>
 
@@ -196,16 +174,18 @@
                                     <table class="table table-striped table-bordered display">
                                         <thead>
                                         <tr>
-                                            <th></th>
+                                            <th>stt</th>
                                             <th>Sản phẩm</th>
                                             <th>Giá</th>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <?php $i = 1; ?>
                                         @foreach($child_products as  $child)
                                             <tr>
+                                                <td>{{$i++}}</td>
                                                 <td>
-                                                    <img src="{{getFeaturedImageProduct($child->image)}}" width="80" alt="">
+                                                    <img src="{{getProductImage($child->image)}}" width="80" alt="">
                                                 </td>
                                                 <td>{{$child->name}}</td>
                                                 <td>{{presentPrice($child->price)}}</td>

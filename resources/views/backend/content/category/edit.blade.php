@@ -69,7 +69,7 @@
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}" {{($category->id) ==($thiscat->parent_id) ? 'selected':'' }}>{{$category->name}}</option>
                                         @if(count($category->childs))
-                                            @include('backend/category/in_edit',['childs' => $category->childs, 'html'=>''])
+                                            @include('backend/content/category/in_edit',['childs' => $category->childs, 'html'=>''])
                                         @endif
                                     @endforeach
                                 </select>
@@ -88,7 +88,7 @@
                             <label for="image" class="col-sm-2 control-label">Ảnh</label>
                             <div class="col-sm-8">
                                 <!-- /.dropdown js__dropdown -->
-                                <input type="file" name="image" id="input-file-now-custom-1" class="dropify" data-default-file="{{getCategoryImgFeatured($thiscat->image)}}" />
+                                <input type="file" name="image" id="input-file-now-custom-1" class="dropify" data-default-file="{{getCategoryImage($thiscat->image)}}" />
                             </div>
                         </div>
                         <div class="form-group margin-bottom-0">

@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\Product\SaveSimpleProductRequest;
+use App\Http\Requests\Product\UpdateSimpleProductRequest;
 use Illuminate\Support\Facades\Session;
-use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Request;
 
 class ProductSimpleController extends ProductController
 {
    public function __construct(
        \App\Model\Product $product,
-       \App\Http\BusinessLayer\Product\HandleProductMedia $handle_media,
+       \App\Http\BusinessLayer\MediaManager\ImageHandler $image_handler,
        \App\Model\Category $category,
        \App\Model\Attribute $attribute,
        \App\Model\ProductAttribute $product_attribute,
@@ -20,7 +20,7 @@ class ProductSimpleController extends ProductController
    {
        parent::__construct(
            $product,
-           $handle_media,
+           $image_handler,
            $category,
            $attribute,
            $product_attribute,
@@ -36,7 +36,7 @@ class ProductSimpleController extends ProductController
      */
     public function store(SaveSimpleProductRequest $request)
     {
-        //Store Image
+        //Store
         $this->saveProductData($request);
         Session::flash('success', 'The product was successfully save!');
         return redirect()->route('product-simple.index');
@@ -44,7 +44,7 @@ class ProductSimpleController extends ProductController
 
     public function saveProductData($request)
     {
-        $image_name = $this->handle_media->SaveProductImages($request->images);
+        $image_name = $this->image_handler->saveImages($this->img_product_dir,$request->images);
 
         $data = array_merge($request->all(),['images' => $image_name]);
         //Store Product Parent
@@ -80,20 +80,14 @@ class ProductSimpleController extends ProductController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UpdateSimpleProductRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSimpleProductRequest $request, $id)
     {
         $product = $this->product->findOrFail($id);
-
-        $image_data = $this->handle_media->SaveProductImages($request->images);
-        if($image_data) {
-            $this->handle_media->DeleteProductImage($product->images);
-        }else{
-            $image_data = $product->images;
-        }
+        $image_data = $this->image_handler->updateImages($this->img_product_dir,$request->images, $product->images);
         $data = array_merge($request->all(),['images' => $image_data]);
         $product->update($data);
 
@@ -153,7 +147,6 @@ class ProductSimpleController extends ProductController
                 }
             }
         }
-
         Session::flash('success', 'The product was successfully updated!');
         return redirect()->back();
     }

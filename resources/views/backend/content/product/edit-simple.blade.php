@@ -109,17 +109,7 @@
                             <label for="featured" class="col-sm-2 control-label">Nổi bật</label>
                             <div class="col-xs-1">
                                 <select class="form-control" id="featured" name="featured">
-                                    <option value="0" {{$product->featured == 0 ? 'selected' : ''}} >No</option>
-                                    <option value="1" {{$product->featured == 1 ? 'selected' : ''}} >Yes</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="visibility" class="col-sm-2 control-label">Hiển thị</label>
-                            <div class="col-xs-1">
-                                <select class="form-control" id="visibility" name="visibility">
-                                    <option value="0" {{$product->visibility == 0 ? 'selected' : ''}} >No</option>
-                                    <option value="1" {{$product->visibility == 1 ? 'selected' : ''}} >Yes</option>
+                                    {!! RenderHtml::getYesNoOption($product->featured) !!}
                                 </select>
                             </div>
                         </div>
@@ -127,8 +117,7 @@
                             <label for="active" class="col-sm-2 control-label">Bật</label>
                             <div class="col-xs-1">
                                 <select class="form-control" id="active" name="active">
-                                    <option value="0" {{$product->active == 0 ? 'selected' : ''}} >No</option>
-                                    <option value="1" {{$product->active == 1 ? 'selected' : ''}} >Yes</option>
+                                    {!! RenderHtml::getYesNoOption($product->active) !!}
                                 </select>
                             </div>
                         </div>
@@ -136,8 +125,7 @@
                             <label for="in_stock" class="col-sm-2 control-label">Trong kho</label>
                             <div class="col-xs-1">
                                 <select class="form-control" id="in_stock" name="in_stock">
-                                    <option value="0" {{$product->in_stock == 0 ? 'selected' : ''}} >No</option>
-                                    <option value="1" {{$product->in_stock == 1 ? 'selected' : ''}} >Yes</option>
+                                    {!! RenderHtml::getYesNoOption($product->in_stock) !!}
                                 </select>
                             </div>
                         </div>
@@ -164,6 +152,7 @@
                                 <input type="text" class="form-control" id="meta_title" name="meta_title" value="{{ $product->meta_title }}">
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="meta_desc" class="col-sm-2 control-label">Meta Description</label>
                             <div class="col-sm-8">

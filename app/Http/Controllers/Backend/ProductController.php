@@ -8,19 +8,19 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-
     protected $product;
-    protected $handle_media;
+    protected $image_handler;
     protected $category;
     protected $attribute;
     protected $product_attribute;
     protected $attribute_value;
     protected $type_id;
+    protected $img_product_dir;
     protected $view;
 
     public function __construct(
         \App\Model\Product $product,
-        \App\Http\BusinessLayer\Product\HandleProductMedia $handle_media,
+        \App\Http\BusinessLayer\MediaManager\ImageHandler $image_handler,
         \App\Model\Category $category,
         \App\Model\Attribute $attribute,
         \App\Model\ProductAttribute $product_attribute,
@@ -28,13 +28,14 @@ class ProductController extends Controller
     )
     {
         $this->product = $product;
-        $this->handle_media = $handle_media;
+        $this->image_handler = $image_handler;
         $this->category = $category;
         $this->attribute = $attribute;
         $this->product_attribute = $product_attribute;
         $this->attribute_value = $attribute_value;
         $this->type_id = 'simple';
         $this->view = 'backend/content/product/';
+        $this->img_product_dir = getProductImagePath();
     }
 
     /**
@@ -54,7 +55,7 @@ class ProductController extends Controller
         $categories = $this->category->all();
 
         if($request->type == 'group'){
-            return view('backend/product/create-group', compact('products', 'categories'));
+            return view($this->view.'create-group', compact('products', 'categories'));
         }
         if($request->type == 'simple'){
             $attributes = $this->attribute->all();
@@ -70,7 +71,6 @@ class ProductController extends Controller
         $product = $this->product->findOrFail($id);
 
         $cat_ids = [];
-
         foreach ($product->categories as $category)
         {
             $cat_ids[] = $category->id;
@@ -89,9 +89,9 @@ class ProductController extends Controller
             }else {
                 $child_id = [];
             }
-            $data['child_products'] = $this->product->whereIn('id', $child_id)->get();
+            $child_products = $this->product->whereIn('id', $child_id)->get();
 
-            return view($this->view.'edit-group', compact('all_products', 'attributes', 'product', 'categories'));
+            return view($this->view.'edit-group', compact('all_products', 'attributes', 'product', 'categories', 'cat_ids', 'child_products'));
         }
 
         if($product->type_id == 'simple'){

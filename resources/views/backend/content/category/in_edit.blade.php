@@ -13,7 +13,7 @@
 
     @if(count($child->childs))
 
-        @include('backend/category/in_edit',['childs' => $child->childs->where('id','!=',$thiscat->id), 'html' => $html])
+        @include('backend/content/category/in_edit',['childs' => $child->childs->where('id','!=',$thiscat->id), 'html' => $html])
 
     @endif
 @endforeach

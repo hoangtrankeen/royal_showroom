@@ -117,14 +117,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="visibility" class="col-sm-2 control-label">Hiển thị</label>
-                            <div class="col-xs-1">
-                                <select class="form-control" id="visibility" name="visibility">
-                                   {!! RenderHtml::getYesNoOption(old('visibility')) !!}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="active" class="col-sm-2 control-label">Bật</label>
                             <div class="col-xs-1">
                                 <select class="form-control" id="active" name="active">

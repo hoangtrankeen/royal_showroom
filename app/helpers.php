@@ -44,6 +44,14 @@ function getProductImage($images)
     return '';
 }
 
+function getCategoryImage($image)
+{
+    if($image){
+        return '/'.getCategoryImagePath().'/'.$image;
+    }
+    return '';
+}
+
 function getAllProductImages($images)
 {
     if($images){

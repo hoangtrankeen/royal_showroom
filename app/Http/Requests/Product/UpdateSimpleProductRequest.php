@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Product;
 
+use App\Model\Product;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSimpleProductRequest extends FormRequest
@@ -25,8 +27,8 @@ class UpdateSimpleProductRequest extends FormRequest
     {
         return [
             'name'           => 'required|max:190',
-            'slug'           => 'required|alpha_dash|min:5|max:255|unique:products,slug,'.$id,
-            'sku'            => 'required|min:5|max:255|unique:products,sku,'.$id,
+            'slug'           => 'required|alpha_dash|min:5|max:255|unique:products,slug,'.$this->product_simple,
+            'sku'            => 'required|min:5|max:255|unique:products,sku,'.$this->product_simple,
             'categories'     => 'required',
             'price'          => 'required|integer',
             'quantity'       => 'required|integer',

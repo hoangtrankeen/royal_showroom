@@ -11,6 +11,8 @@ class Category extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['name','parent_id','image', 'order', 'description', 'active'];
+
     public function products()
     {
         return $this->belongsToMany('App\Model\Product');
