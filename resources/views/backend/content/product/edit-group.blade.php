@@ -58,13 +58,20 @@
                             </div>
                         </div>
 
-
                         <div class="form-group">
-                            <label for="price" class="col-sm-2 control-label">Giá</label>
+                            <label for="price" class="col-sm-2 control-label">Giá niêm yết</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="price" name="price" value="{{ $product->price }}">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="discount_price" class="col-sm-2 control-label">Giá khuyến mãi</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="discount_price" name="discount_price" value="{{$product->discount_price}}">
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="quantity" class="col-sm-2 control-label">Số lượng</label>
                             <div class="col-sm-8">
@@ -175,6 +182,7 @@
                                         <thead>
                                         <tr>
                                             <th>stt</th>
+                                            <th></th>
                                             <th>Sản phẩm</th>
                                             <th>Giá</th>
                                         </tr>
@@ -185,7 +193,7 @@
                                             <tr>
                                                 <td>{{$i++}}</td>
                                                 <td>
-                                                    <img src="{{getProductImage($child->image)}}" width="80" alt="">
+                                                    <img src="{{getProductImage($child->images)}}" width="80" alt="">
                                                 </td>
                                                 <td>{{$child->name}}</td>
                                                 <td>{{presentPrice($child->price)}}</td>
@@ -360,6 +368,14 @@
                 console.log(arr);
             } );
         } );
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#name").keyup(function () {
+                ChangeToSlug('name','slug');
+            })
+        })
     </script>
 
 @endsection

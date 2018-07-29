@@ -7,7 +7,9 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    protected $fillable = ['name', 'sku','slug','price','quantity','details','description','featured','active','in_stock','images','sort_order','type_id','child_id','parent_id'];
+    protected $fillable = ['name', 'sku','slug','price','sale_price','quantity','details',
+        'description','featured','active','in_stock','images','sort_order',
+        'type_id','child_id','parent_id'];
 
     protected $type_id = [
         'simple',
@@ -26,7 +28,7 @@ class Product extends Model
 
     public function attributeValue()
     {
-        return $this->belongsToMany('App\Model\AttributeValue', 'product_attribute', 'product_id', 'attribute_value_id')->withPivot('status');
+        return $this->belongsToMany('App\Model\AttributeValue', 'product_attribute', 'product_id', 'attribute_value_id')->withPivot('active');
     }
 
     public function orders()

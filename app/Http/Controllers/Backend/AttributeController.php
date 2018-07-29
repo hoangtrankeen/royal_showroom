@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Model\Attribute;
-use App\Model\AttributeValue;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -11,10 +9,18 @@ use Illuminate\Support\Facades\Session;
 class AttributeController extends Controller
 {
     protected $type;
+    protected $attribute;
+    protected $attribute_value;
 
-    public function __construct()
+
+    public function __construct(
+        \App\Model\Attribute $attribute,
+        \App\Model\AttributeValue $attribute_value
+    )
     {
-        $this->type = Attribute::availableAttributeType();
+        $this->attribute = $attribute;
+        $this->attribute_value = $attribute_value;
+        $this->type = $this->attribute->availableAttributeType();
     }
 
     /**
@@ -24,8 +30,8 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        $data['attributes'] = Attribute::all();
-        return view('backend/attribute/index',$data);
+        $attributes = $this->attribute->all();
+        return view('backend/content/attribute/index', compact('attributes'));
     }
 
     /**
@@ -35,8 +41,8 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        $data['attr_types'] = Attribute::availableAttributeType();
-        return view('backend/attribute/create',$data);
+        $attr_types = $this->type;
+        return view('backend/content/attribute/create',compact('attr_types'));
     }
 
     /**
@@ -47,53 +53,29 @@ class AttributeController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
         $types = implode(",", $this->type);
-
         $this->validate($request, array(
             'name'           => 'required|max:190',
             'type'           => 'required|max:190|in:'.$types,
-            'inform_name'    => 'required|max:190',
-            'status'         => 'required|integer',
+            'inform_name'    => 'required|alpha_dash|min:5|max:255|unique:attributes,inform_name',
+            'active'         => 'required|boolean',
         ));
-
-
-        $attribute = new Attribute();
-        $attribute->name = $request->name;
-        $attribute->type = $request->type;
-        $attribute->inform_name = $request->inform_name;
-        $attribute->status = $request->status;
-        $attribute->save();
+        $attribute = $this->attribute->create($request->all());
 
         // Get Attribute value in form
         if($request->type == 'select'){
             $i = 0;
             while ($request->has('attr_value_'.($i+1)) && $request->input('attr_value_'.($i+1)) !== null && is_integer((int)$request->input('attr_value_'.($i+1)))) {
-                $attr_val = new AttributeValue;
-
-                $attr_val->attribute_id = $attribute->id;
-                $attr_val->name = $request->input('attr_value_'.($i+1)) ;
-
-                $attr_val->save();
-
+                $this->attribute_value->create([
+                    'attribute_id' => $attribute->id,
+                    'name' => $request->input('attr_value_'.($i+1))
+                ]);
                 $i++;
             }
-
         }
 
         Session::flash('success', 'The attribute was successfully save!');
         return redirect()->route('attribute.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -104,9 +86,9 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
-        $data['attribute'] = Attribute::findOrFail($id);
-        $data['attr_types'] = Attribute::availableAttributeType();
-        return view('backend/attribute/edit', $data);
+        $attribute = $this->attribute->findOrFail($id);
+        $attr_types = $this->type;
+        return view('backend/content/attribute/edit', compact('attribute', 'attr_types'));
     }
 
     /**
@@ -121,31 +103,30 @@ class AttributeController extends Controller
         //$types = implode(",", $this->type);
         $this->validate($request, array(
             'name'   => 'required|max:190',
-            'status'   => 'required|integer',
+            'active'   => 'required|boolean',
+            'inform_name'   => 'required|alpha_dash|min:5|max:255|unique:attributes,inform_name,'.$id,
         ));
 
-        $attribute = Attribute::findOrFail($id);
-
-        $attribute->name = $request->name;
-        $attribute->status = $request->status;
-
-
-        $attribute->save();
+        $attribute = $this->attribute->findOrFail($id);
+        $attribute->update([
+            'name' => $request->name,
+            'active' => $request->active,
+            'inform_name' => $request->inform_name
+        ]);
 
         // Get Attribute value in form
         if($request->type == 'select'){
-
             foreach($attribute->attributeValue as $value){
                 if ($request->has('attr_value_'.$value->id) && $request->input('attr_value_'.$value->id) !== null && is_integer((int)$request->input('attr_value_'.$value->id))) {
                     if(!empty($attribute->attributeValue)){
-                        AttributeValue::where('id', $value->id)
+                        $this->attribute_value->where('id', $value->id)
                             ->where( 'attribute_id', $attribute->id)
                             ->update([
                                 'name' => $request->input('attr_value_'.$value->id)
                             ]);
                     }
                 }else{
-                    $del_attr = AttributeValue::find($value->id);
+                    $del_attr = $this->attribute_value->findOrFail($value->id);
                     $del_attr->product()->detach();
                     $del_attr->delete();
                 }
@@ -155,16 +136,14 @@ class AttributeController extends Controller
             $i = $attribute->attributeValue()->count();
             while ($request->has('new_attr_value_'.($i+1)) && $request->input('new_attr_value_'.($i+1)) !== null && is_integer((int)$request->input('new_attr_value_'.($i+1)))) {
 
-                $attr_val = new AttributeValue;
-                $attr_val->attribute_id = $attribute->id;
-                $attr_val->name = $request->input('new_attr_value_'.($i+1)) ;
-                $attr_val->save();
+                $this->attribute_value->create([
+                    'attribute_id' => $attribute->id,
+                    'name' => $request->input('new_attr_value_'.($i+1))
+                ]);
 
                 $i++;
             }
         }
-
-
         Session::flash('success', 'The attribute was successfully save!');
         return redirect()->back();
     }
@@ -177,7 +156,7 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
-        $attribute = Attribute::findOrFail($id);
+        $attribute = $this->attribute->findOrFail($id);
         foreach($attribute->attributeValue as $value)
         {
             $value->product()->detach();
@@ -185,8 +164,7 @@ class AttributeController extends Controller
         }
 
         $attribute->delete();
-
-        Session::flash('success', 'ok');
+        Session::flash('success', 'This attribute was successfully deleted');
         return redirect()->route('attribute.index');
     }
 }

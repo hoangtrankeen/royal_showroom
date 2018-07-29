@@ -26,7 +26,7 @@ class SaveCategoryRequest extends FormRequest
         return [
             // rules, criteria
             'name'           => 'required|max:190',
-            'slug'           => 'required|alpha_dash|unique:products,slug',
+            'slug'           => 'required|alpha_dash|unique:categories,slug',
             'parent_id'      => 'required|max:255',
             'order'          => 'required|integer',
             'active'          => 'required|integer',

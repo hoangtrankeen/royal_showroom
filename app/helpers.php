@@ -64,3 +64,15 @@ function getAllProductImages($images)
     }
     return [];
 }
+
+function presentDateFormat($date = '')
+{
+    if($date === null){
+        $date = '';
+    }else{
+        $date = new DateTime($date);
+        $date = date_format($date,"d-m-Y");
+    }
+
+    return $date;
+}

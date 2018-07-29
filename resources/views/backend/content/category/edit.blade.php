@@ -113,4 +113,12 @@
     <!-- Dropify -->
     <script src="{{asset('backend/assets/plugin/dropify/js/dropify.min.js')}}"></script>
     <script src="{{asset('backend/assets/scripts/fileUpload.demo.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#name").keyup(function () {
+                ChangeToSlug('name','slug');
+            })
+        })
+    </script>
 @endsection

@@ -131,34 +131,27 @@ class ProductGroupController extends ProductController
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-
-
+        $product = $this->product->findOrFail($id);
         $product->categories()->detach();
         $product->attributeValue()->detach();
         $product->orders()->detach();
-
-        $simples = Product::where('type_id','simple')->get();
+        $simples =  $this->product->where('type_id','simple')->get();
 
         foreach($simples as $simple)
         {
             $parent_id = json_decode($simple->parent_id);
-
             if(is_array($parent_id) ){
                 $key = array_search($id,$parent_id);
-
                 if($key!==false){
-
                     unset($parent_id[$key]);
-
-                    $update = Product::find($simple->id);
-
-                    $update->parent_id = json_encode($parent_id);
-                    $update->save();
+                    $this->product->find($simple->id)->update([
+                        'parent_id' => json_encode($parent_id)
+                    ]);
                 }
             }
         }
 
+        $this->image_handler->deleteImages($this->img_product_dir, $product->images);
         $product->delete();
 
         Session::flash('success', 'The product was successfully deleted!');

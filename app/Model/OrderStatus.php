@@ -10,7 +10,7 @@ class OrderStatus extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['id','name'];
+    protected $fillable = ['name','code','description','details','active'];
 
     public function order()
     {

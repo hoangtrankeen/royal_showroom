@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">Tên</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name')}}" onkeyup="ChangeToSlug('name');">
+                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name')}}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -70,13 +70,20 @@
                             </div>
                         </div>
 
-
                         <div class="form-group">
-                            <label for="price" class="col-sm-2 control-label">Giá</label>
+                            <label for="price" class="col-sm-2 control-label">Giá niêm yết</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="price" name="price" value="{{ old('price')}}">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="discount_price" class="col-sm-2 control-label">Giá khuyến mãi</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="discount_price" name="discount_price" value="{{ old('discount_price')}}">
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="quantity" class="col-sm-2 control-label">Số lượng</label>
                             <div class="col-sm-8">
@@ -169,7 +176,7 @@
                             <div class="form-group">
                                 <label for="attribute" class="col-sm-2 control-label">{{$attribute->name}}</label>
                                 <div class="col-sm-8">
-                                    {!! Royal::getCustomAttribute($attribute)!!}
+                                    {!! RenderHtml::getCustomAttribute($attribute)!!}
                                 </div>
                             </div>
                         @endforeach
@@ -241,4 +248,11 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function () {
+            $("#name").keyup(function () {
+                ChangeToSlug('name','slug');
+            })
+        })
+    </script>
 @endsection

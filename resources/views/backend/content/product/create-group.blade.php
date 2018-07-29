@@ -58,13 +58,20 @@
                             </div>
                         </div>
 
-
                         <div class="form-group">
-                            <label for="price" class="col-sm-2 control-label">Giá</label>
+                            <label for="price" class="col-sm-2 control-label">Giá niêm yết</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="price" name="price" value="{{ old('price')}}">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="discount_price" class="col-sm-2 control-label">Giá khuyến mãi</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="discount_price" name="discount_price" value="{{ old('discount_price')}}">
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="quantity" class="col-sm-2 control-label">Số lượng</label>
                             <div class="col-sm-8">
@@ -133,13 +140,6 @@
 
                         <div class="form-group">
                             <label for="images" class="col-sm-2 control-label">Ảnh</label>
-                            <div class=" col-xs-8">
-                                <input type="file" name="image"  id="file" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="images" class="col-sm-2 control-label">Ảnh phụ</label>
                             <div class=" col-xs-8">
                                 <input type="file" name="images[]" multiple  id="files" />
                             </div>
@@ -336,4 +336,11 @@
         } );
     </script>
 
+    <script>
+        $(document).ready(function () {
+            $("#name").keyup(function () {
+                ChangeToSlug('name','slug');
+            })
+        })
+    </script>
 @endsection

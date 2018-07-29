@@ -25,7 +25,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name'           => 'required|max:190',
-            'slug'           => 'required|alpha_dash|max:255|unique:products,slug,'.$this->category,
+            'slug'           => 'required|alpha_dash|max:255|unique:categories,slug,'.$this->category,
             'parent_id'      => 'required|max:255',
             'order'          => 'required|integer',
             'active'          => 'required|integer',

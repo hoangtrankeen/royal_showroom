@@ -33,8 +33,11 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth:admin'], function () {
     Route::resource('product-group','Backend\ProductGroupController');
     Route::resource('product','Backend\ProductController');
 
+    Route::resource('attribute','Backend\AttributeController');
     Route::resource('category','Backend\CategoryController');
+    Route::resource('order','Backend\OrderController');
 
-
+    Route::resource('order-status','Backend\OrderStatusController');
+    Route::resource('payment-method','Backend\PaymentMethodController');
 
 });

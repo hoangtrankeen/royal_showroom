@@ -1,10 +1,9 @@
-function ChangeToSlug(id)
+function ChangeToSlug(target, output)
 {
     var title, slug;
 
     //Lấy text từ thẻ input title
-    title = document.getElementById(id).value;
-
+    title = document.getElementById(target).value;
     //Đổi chữ hoa thành chữ thường
     slug = title.toLowerCase();
 
@@ -30,5 +29,5 @@ function ChangeToSlug(id)
     slug = '@' + slug + '@';
     slug = slug.replace(/\@\-|\-\@|\@/gi, '');
     //In slug ra textbox có id “slug”
-    document.getElementById('slug').value = slug;
+    document.getElementById(output).value = slug;
 }

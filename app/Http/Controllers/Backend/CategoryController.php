@@ -60,11 +60,8 @@ class CategoryController extends Controller
     public function store(SaveCategoryRequest $request)
     {
         $image_data = $this->image_handler->saveImage($this->category_image_dir,$request->image);
-
         $data = array_merge($request->all(), ['image' => $image_data]);
-
         $this->category->create($data);
-
         Session::flash('success', 'The category was successfully save!');
         return redirect()->route('category.index');
     }
@@ -92,7 +89,6 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, $id)
     {
         $category = $this->category->findOrFail($id);
-
         $image_data = $this->image_handler->updateImage($this->category_image_dir, $request->image, $category->image);
         $data = array_merge($request->all(), ['image' => $image_data]);
         $category->update($data);
@@ -110,11 +106,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = $this->category->findOrFail($id);
-
         $category->products()->detach();
-
         $category->delete();
-
         Session::flash('success', 'The category was successfully deleted!');
         return redirect()->route('category.index');
     }

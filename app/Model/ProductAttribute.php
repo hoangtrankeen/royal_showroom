@@ -15,4 +15,6 @@ class ProductAttribute extends Model
 {
     protected $table= 'product_attribute';
 
+    protected $fillable = ['product_id', 'attribute_value_id', 'active'];
+
 }

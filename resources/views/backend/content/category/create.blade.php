@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">Tên</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name')}}" onkeyup="ChangeToSlug('name')">
+                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name')}}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="active" class="col-sm-2 control-label">Bật</label>
+                            <label for="active" class="col-sm-2 control-label">Hoạt động</label>
                             <div class="col-xs-1">
                                 <select class="form-control" id="active" name="active">
                                     {!! RenderHtml::getYesNoOption(old('active')) !!}
@@ -106,4 +106,12 @@
     <!-- Dropify -->
     <script src="{{asset('backend/assets/plugin/dropify/js/dropify.min.js')}}"></script>
     <script src="{{asset('backend/assets/scripts/fileUpload.demo.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#name").keyup(function () {
+                ChangeToSlug('name','slug');
+            })
+        })
+    </script>
 @endsection

@@ -159,8 +159,8 @@ class ProductSimpleController extends ProductController
      */
     public function destroy($id)
     {
-        $groups = Product::where('type_id', 'group')->get();
-        $product = Product::findOrFail($id);
+        $groups = $this->product->where('type_id', 'group')->get();
+        $product = $this->product->findOrFail($id);
 
         $product->categories()->detach();
         $product->attributeValue()->detach();
@@ -177,15 +177,14 @@ class ProductSimpleController extends ProductController
 
                     unset($child_id[$key]);
 
-                    $update = Product::find($group->id);
-
-                    $update->child_id = json_encode($child_id);
-
-                    $update->save();
+                    $product->find($group->id)->update([
+                        'child_id' => json_encode($child_id)
+                    ]);
                 }
             }
         }
 
+        $this->image_handler->deleteImages($this->img_product_dir, $product->images);
         $product->delete();
 
         Session::flash('success', 'The product was successfully deleted!');

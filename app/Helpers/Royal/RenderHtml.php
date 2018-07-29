@@ -25,6 +25,7 @@ class RenderHtml extends ServiceProvider
      */
     public static function getCustomAttribute($attr, $product = null)
     {
+
         $html = '';
 
         if($product !== null){
@@ -321,7 +322,7 @@ class RenderHtml extends ServiceProvider
 
     public static function getAvailableAttribute()
     {
-        $collection =  Attribute::with('attributeValue')->where('attribute.status',1)->get();
+        $collection =  Attribute::with('attributeValue')->where('attribute.active',1)->get();
 
         return $collection;
     }

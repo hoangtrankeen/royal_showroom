@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
-    protected $table = 'attribute';
+    protected $table = 'attributes';
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['name', 'type'];
+    protected $fillable = ['name', 'type','inform_name','active'];
 
     public function attributeValue()
     {
         return $this->hasMany('App\Model\AttributeValue','attribute_id', 'id');
     }
 
-    public static function availableAttributeType()
+    public function availableAttributeType()
     {
         return [
           'select',

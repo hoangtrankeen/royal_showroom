@@ -17,7 +17,6 @@ class CreateAttributeValueTable extends Migration
             $table->increments('id');
             $table->integer('attribute_id')->unsigned()->nullable();
             $table->string('name');
-            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }
