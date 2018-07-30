@@ -102,6 +102,7 @@ class OrderStatusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->order_status->findOrFail($id)->delete();
+        return redirect()->route('order-status.index');
     }
 }

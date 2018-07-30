@@ -41,18 +41,6 @@
         <div class="col-md-12 col-xs-12">
             <div class="box-content">
                 <h4 class="box-title">Tạo đơn hàng</h4>
-                <div class="dropdown js__drop_down">
-                    <a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-                    <ul class="sub-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else there</a></li>
-                        <li class="split"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                    <!-- /.sub-menu -->
-                </div>
-
                 <div class="row">
                     <div class="container">
                         <button type="button" class=" pull-right btn btn-success margin-bottom-10 waves-effect waves-light" data-toggle="modal" data-target="#boostrapModal-2">Chọn sản phẩm</button>
@@ -163,7 +151,7 @@
                                     @foreach(Cart::content() as $item)
                                         <tr>
                                             <td>
-                                                <img src="{{getFeaturedImageProduct($item->model->image)}}" width="80" alt="">
+                                                <img src="{{getProductImage($item->model->images)}}" width="80" alt="">
                                             </td>
                                             <td>{{$item->name}}</td>
                                             <td>{{$item->qty}}</td>
@@ -227,8 +215,8 @@
                                     <tbody>
                                     @foreach($products as $product)
                                         <tr>
-                                            <td><img src="{{getFeaturedImageProduct($product->image)}}" width="60" alt=""></td>
-                                            <td><a href="{{route('product.edit', $product->id )}}"  data-value="{{$product->id}}">{{$product->name}}</a></td>
+                                            <td><img src="{{getProductImage($product->images)}}" width="60" alt=""></td>
+                                            <td><a href="javascript:void(0)"  data-value="{{$product->id}}">{{$product->name}}</a></td>
                                             <td>{{$product->sku}}</td>
                                             <td>{{$product->price}}</td>
                                         </tr>

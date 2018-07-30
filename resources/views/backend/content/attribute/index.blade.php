@@ -65,7 +65,7 @@
 							<form action="{{route('attribute.destroy', $attribute->id)}}" method="post">
 								{{method_field('DELETE')}}
 								{{csrf_field()}}
-								<button type="submit" id="delete" class="btn btn-xs btn-danger">Xóa</button>
+								<button type="submit" class="delete btn btn-xs btn-danger">Xóa</button>
 							</form>
 						</td>
 					</tr>

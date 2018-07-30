@@ -179,6 +179,7 @@ return [
 
         //Royal Service
         App\Providers\RoyalHtmlServiceProvider::class,
+        App\Providers\RoyalStoreProvider::class,
 
     ],
 
@@ -231,6 +232,7 @@ return [
 
         //Royal Alias
         'RenderHtml' => App\Helpers\Royal\RenderHtml::class,
+        'StoreManager' => App\Helpers\Royal\StoreManager::class,
     ],
 
 ];

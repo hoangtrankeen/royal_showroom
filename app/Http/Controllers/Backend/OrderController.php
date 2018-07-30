@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helpers\Royal\StoreManager;
 use Carbon\Carbon;
 use App\Mail\SendOrderConfirmation;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class OrderController extends Controller
         $payments = $this->payment_method->all();
         $products = $this->product->all();
 
-        return view('backend/order/create', compact('payments','products'));
+        return view('backend/content/order/create', compact('payments','products'));
     }
 
     /**
@@ -95,7 +96,7 @@ class OrderController extends Controller
         foreach($request->arr as $item)
         {
             $item = (int) $item;
-            $product = Product::find($item);
+            $product = $this->product->findOrFail($item);
 
             $quantity = $request->quantity ?? 1;
             $duplicates = Cart::search(function ($cartItem, $rowId) use ($item) {
@@ -107,7 +108,7 @@ class OrderController extends Controller
                 $qty_incart = $duplicates->first()->qty;
                 Cart::update( $rowId, $qty_incart + $quantity);
             }else{
-                Cart::add($item, $product->name, $quantity, Product::getFinalPrice($product))
+                Cart::add($item, $product->name, $quantity, StoreManager::getFinalPrice($product))
                     ->associate('App\Model\Product');
             }
         }
