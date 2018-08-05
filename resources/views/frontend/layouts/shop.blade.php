@@ -11,12 +11,11 @@
 </header>
 
 @include('frontend/partials/panel-cart')
-{{--@include('frontend/partials/filter')--}}
 
 @yield('content')
 
 
-@include('frontend/partials/shop-block/featured-group-slider')
+@include('frontend/block/shop-block/featured-group-slider')
 @include('frontend/partials/footer')
 @include('frontend/partials/modal')
 @include('frontend/partials/script')

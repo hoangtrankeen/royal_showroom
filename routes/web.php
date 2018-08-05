@@ -22,8 +22,8 @@ Route::post('/add-to-cart-group','Frontend\CartController@addCartGroupProduct');
 Route::post('/cart/switchToSaveForLater/{product}', 'Frontend\CartController@switchToSaveForLater')->name('cart.switchToSaveForLater');
 
 Route::get('/product', 'Frontend\ShopController@allProduct')->name('catalog.product.all');
-Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout')->middleware(CartMiddleware::class);
-Route::post('/checkout/store', 'Frontend\CheckoutController@placeOrder')->name('checkout.placeorder')->middleware(CartMiddleware::class);
+Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
+Route::post('/checkout/store', 'Frontend\CheckoutController@placeOrder')->name('checkout.placeorder')->middleware('cart');
 Route::get('/checkout/success', 'Frontend\CheckoutController@checkoutSuccess')->name('checkout.success');
 
 Route::get('/category/{slug}', 'Frontend\ShopController@catalogCategory')->name('catalog.category');

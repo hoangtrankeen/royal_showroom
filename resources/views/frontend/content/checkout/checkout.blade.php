@@ -229,18 +229,12 @@
                                         @foreach(Cart::content() as $item)
                                             <tr>
                                                 <td class="product-thumb">
-                                                    <img src="{{getFeaturedImageProduct($item->model->image)}}" alt="{{$item->name}}">
+                                                    <img src="{{getProductImage($item->model->images)}}" alt="{{$item->name}}">
                                                 </td>
                                                 <td class="product-name">{{$item->name}} x {{$item->qty}}</td>
                                                 <td class="product-total">{{presentPrice($item->total)}}</td>
                                             </tr>
                                         @endforeach
-
-                                        <tr>
-                                            <th class="mtext-106 cl2">Free Ship</th>
-                                            <td></td>
-                                            <td class="">0</td>
-                                        </tr>
                                         <tr>
                                             <th class="mtext-106 cl2">Tổng cộng</th>
                                             <td></td>
@@ -266,7 +260,7 @@
 
                                     </div>
                                     <div class="place-order-action ">
-                                        <button type="submit" class="flex-c-m stext-101 cl0 size-115 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Đặt hàng</button>
+                                        <button type="submit" class="flex-c-m size-116 stext-101 cl0 size-116 bg1 bor14 hov-btn3 p-lr-15 trans-04 pointer">Thanh Toán</button>
                                     </div>
                                 </div>
 

@@ -44,7 +44,7 @@
                                 <tr class="table_row" id="item-{{$item->model->id}}">
                                     <td class="column-1">
                                         <div class="how-itemcart1">
-                                            <img src="{{getFeaturedImageProduct($item->model->image)}}" alt="IMG">
+                                            <img src="{{getProductImage($item->model->images)}}" alt="IMG">
                                         </div>
                                     </td>
                                     <td class="column-2">{{ $item->model->name }}</td>
@@ -83,7 +83,7 @@
                                     </tr>
                                     <tr>
                                         <th class="column-custom">Hình ảnh</th>
-                                        <td><img src="{{getFeaturedImageProduct($item->model->image)}}" alt="IMG" width="100px"></td>
+                                        <td><img src="{{getProductImage($item->model->images)}}" alt="IMG" width="100px"></td>
                                     </tr>
                                     <tr>
                                         <th class="column-custom">Giá</th>
@@ -106,7 +106,7 @@
                                     </tr>
                                     <tr>
                                         <th class="column-custom">Tổng (VNĐ)</th>
-                                        <td> {{ ($item->total) }}</td>
+                                        <td> {{ $item->total }}</td>
                                     </tr>
                                 @endforeach
                             </table>

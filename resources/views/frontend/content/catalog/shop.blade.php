@@ -53,7 +53,7 @@
                             </h4>
                         </div>
                         <nav id="main-nav">
-                            {{ManagerCatalog::showLeftCategories()}}
+                            {{RenderHtml::showLeftCategories()}}
                         </nav>
 
                         <div class="m-t-30">
@@ -62,10 +62,10 @@
                             </h4>
 
                             <ul>
-                                @foreach(ManagerCatalog::getFeaturedProduct() as $product)
+                                @foreach(StoreManager::getFeaturedProducts() as $product)
                                     <li class="flex-w flex-t p-b-30">
                                         <a href="{{route('catalog.product',['slug'=>$product->slug])}}" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                            <img src="{{getFeaturedImageProduct($product->image)}}" alt="PRODUCT" width="90" height="100">
+                                            <img src="{{getProductImage($product->images)}}" alt="PRODUCT" width="90" height="100">
                                         </a>
 
                                         <div class="size-215 flex-col-t p-t-8">
@@ -160,7 +160,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        @foreach(ManagerCatalog::getAvailableAttribute() as $attribute)
+                                        @foreach(StoreManager::getAvailableAttributes() as $attribute)
                                         <div class="filter-col3 p-r-15 p-b-27">
                                             <div class="mtext-102 cl2 p-b-15">
                                                 {{$attribute->name}}
@@ -187,7 +187,7 @@
                                 <!-- Block2 -->
                                 <div class="block2">
                                     <div class="block2-pic hov-img0">
-                                        <img src="{{getFeaturedImageProduct($product->image)}}" alt="IMG-PRODUCT">
+                                        <img src="{{getProductImage($product->images)}}" alt="IMG-PRODUCT">
 
                                         <a href="#" data-value="{{$product->slug}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                             Xem nhanh
@@ -240,11 +240,4 @@
             });
         });
     </script>
-
-    {{--<script>--}}
-        {{--$(".sort-field").on("change", function () {--}}
-            {{--var sort_value = $(this).val();--}}
-            {{--window.location.href = window.location.origin + '/catalog/category' + '?sort='+sort_value;--}}
-        {{--});--}}
-    {{--</script>--}}
 @endsection

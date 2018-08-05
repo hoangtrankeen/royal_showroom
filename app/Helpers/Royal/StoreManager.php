@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Helpers\Royal;
+use App\Model\Attribute;
 use App\Model\Category;
 use App\Model\Product;
 use Carbon\Laravel\ServiceProvider;
@@ -37,5 +38,12 @@ class StoreManager extends ServiceProvider
     {
         return Product::where('featured',1)
             ->where('active',1)->get();
+    }
+
+    public static function getAvailableAttributes()
+    {
+        $collection =  Attribute::with('attributeValue')->where('attributes.active',1)->get();
+
+        return $collection;
     }
 }

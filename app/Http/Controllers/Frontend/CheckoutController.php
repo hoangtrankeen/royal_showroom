@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Frontend\HandleCheckoutController;
 use App\Http\Middleware\CartMiddleware;
-use App\Jobs\SendOrderConfirmation;
 use App\Model\Order;
 use App\Model\OrderProduct;
 use App\Model\PaymentMethod;
@@ -37,7 +36,7 @@ class CheckoutController extends Controller
     public function index()
     {
         $payments = PaymentMethod::all();
-        return view('frontend/checkout')->with('payments', $payments);
+        return view('frontend/content/checkout/checkout')->with('payments', $payments);
     }
 
     /**

@@ -10,10 +10,4 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public $frontend_view;
-    public function __construct()
-    {
-        $this->frontend_view = 'frontend/content';
-    }
 }

@@ -11,7 +11,7 @@ class Category extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['name','parent_id','image', 'order', 'description', 'active'];
+    protected $fillable = ['name','slug','parent_id','image', 'order', 'description', 'active'];
 
     public function products()
     {
@@ -27,7 +27,6 @@ class Category extends Model
 
     public function getParentCategories()
     {
-        return Category::where('parent_id',1)->get();
+        return Category::where('parent_id',0)->get();
     }
-
 }

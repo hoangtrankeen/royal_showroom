@@ -2,18 +2,29 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Model\Attribute;
-use App\Model\Product;
-use App\Model\Post;
-use App\Model\Category;
+use App\Helpers\Royal\StoreManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class ShopController extends Controller
 {
-    function __construct() {
-        parent::__construct();
+    protected $product;
+    protected $category;
+    protected $post;
+    protected $attribute;
+    protected $toolbar;
+
+    function __construct(
+        \App\Model\Product $product,
+        \App\Model\Category $category,
+        \App\Model\Attribute $attribute,
+        \App\Http\BusinessLayer\FrontStore\Toolbar $toolbar
+    ) {
+         $this->product = $product;
+         $this->category = $category;
+         $this->attribute = $attribute;
+         $this->toolbar = $toolbar;
     }
 
     /**
@@ -23,31 +34,19 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $categories = Category::where('parent_id',0)
-            ->where('active',1)
-            ->orderBy('order')
-            ->get();
-        $featured = Product::where('active',1)
-            ->where('featured', 1)->where('type_id','simple')
-            ->take(6)->get();
-        $group = Product::where('active',1)
-           ->where('type_id','group')
-            ->take(5)->get();
-
-        return view($this->frontend_view.'/home');
+        return view('frontend/content/home');
     }
 
     public function quickView(Request $request)
     {
         $slug = $request->q;
-        $product = Product::where('slug', $slug)->first();
-        $product->image = getFeaturedImageProduct($product->image);
-
-        $final_price = Product::getFinalPrice($product);
+        $product = $this->product->where('slug', $slug)->first();
+        $product->image = getProductImage($product->images);
+        $final_price = StoreManager::getFinalPrice($product);
         $product->priceformat = presentPrice($final_price);
         $product->price = $final_price;
         $data = [
-            'product' => $product,
+        'product' => $product,
         ];
         return response()->json($data, 200);
     }
@@ -55,18 +54,14 @@ class ShopController extends Controller
     public function catalogCategory($slug, Request $request)
     {
         $pagination = 9;
-        $category = Category::where('slug', $slug)->first();
+
+        $category = $this->category->where('slug',$slug)->first();
 
         $products = $category->products();
 
-        $products = $this->_toolbar->filterCollection($products);
+        $products = $this->toolbar->filterCollection($products);
 
         $products = $products->paginate($pagination);
-
-        foreach($products as $key =>  $product)
-        {
-            $product->final_price = Product::getFinalPrice($product);
-        }
 
         if($request->session()->has('category')){
             $request->session()->forget('category');
@@ -76,10 +71,7 @@ class ShopController extends Controller
             'slug' => $category->slug
         ]);
 
-        $data['products'] = $products;
-        $data['category'] = $category;
-
-        return view('frontend/shop', $data);
+        return view('frontend/content/catalog/shop', compact('products', 'category'));
     }
 
     public function allProduct(Request $request)
@@ -108,28 +100,20 @@ class ShopController extends Controller
      */
     public function catalogProduct($slug)
     {
-        $product = Product::where('slug', $slug)->firstOrFail();
-
-        $product->final_price = Product::getFinalPrice($product);
-
-        $data['product'] = $product;
+        $product = $this->product->where('slug', $slug)->firstOrFail();
+        $product->final_price =  StoreManager::getFinalPrice($product);
 
         if($product->type_id == 'group'){
             $child_id = json_decode($product->child_id);
-
-            $child_products = Product::whereIn('id', (array)$child_id)->get();
-
+            $child_products = $this->product->whereIn('id', $child_id)->get();
             foreach($child_products as $product)
             {
                 $product->final_price = Product::getFinalPrice($product);
             }
-
-            $data['child_products'] = $child_products;
-
-            return view('frontend/catalog/product/combo-detail',$data);
+            return view('frontend/content/catalog/product/combo-detail',compact('child_products', 'product'));
         }
 
-        return view('frontend/catalog/product/simple-product',$data);
+        return view('frontend/content/catalog/product/simple-product',compact('child_products', 'product'));
     }
 
     public function search(Request $request)

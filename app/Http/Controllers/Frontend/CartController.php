@@ -2,19 +2,28 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Model\Product;
-use App\Model\Category;
+use App\Helpers\Royal\StoreManager;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
+
 class CartController extends Controller
 {
-    protected $handle_cart;
-    public function __construct(HandleCartController $handlecart)
+    public $handle_cart;
+    public $category;
+    public $product;
+
+    public function __construct(
+        \App\Model\Product $product,
+        \App\Model\Category $category,
+        \App\Http\BusinessLayer\FrontStore\HandleCart $handleCart
+    )
     {
-        $this->handle_cart = $handlecart;
+        $this->handle_cart = $handleCart;
+        $this->category = $category;
+        $this->product = $product;
     }
 
     /**
@@ -24,32 +33,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $data['categories'] = Category::all();
-        $data['mightAlsoLike'] = Product::mightAlsoLike()->get();
-
-        return view('frontend/cart', $data);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
-            return $cartItem->id === $request->id;
-        });
-
-        if ($duplicates->isNotEmpty()) {
-            return redirect()->route('cart.index')->with('success_message', 'Item is already in your cart!');
-        }
-
-        Cart::add($request->id, $request->name, $request->quantity, $request->final_price)
-            ->associate('App\Model\Product');
-
-        return redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!');
+        return view('frontend/content/checkout/cart');
     }
 
     /**
@@ -88,12 +72,11 @@ class CartController extends Controller
         }
 
         $cart_content = Cart::content();
-
         $cart_items = [];
         $content = [];
         foreach($cart_content as $item)
         {
-            $cart_items['image'] = getFeaturedImageProduct($item->model->image);
+            $cart_items['image'] = getProductImage($item->model->images);
             $cart_items['name'] = $item->name;
             $cart_items['qty'] = $item->qty;
             $cart_items['price'] = presentPrice($item->price);
@@ -135,7 +118,7 @@ class CartController extends Controller
             $content = [];
             foreach($cart_content as $item)
             {
-                $cart_items['image'] = getFeaturedImageProduct($item->model->image);
+                $cart_items['image'] = getProductImage($item->model->images);
                 $cart_items['name'] = $item->name;
                 $cart_items['qty'] = $item->qty;
                 $cart_items['price'] = presentPrice($item->price);
@@ -192,23 +175,25 @@ class CartController extends Controller
     {
         if ($request->isMethod('post')){
 
-            $validator = Validator::make($request->all(), [
-                'quantity' => 'required|numeric|min:1'
-            ]);
-
-            if($validator->fails()){
+            if($request->quantity < 1){
                 return response()->json([
                     'success' => false,
-                    'message' => 'Số lượng nhỏ nhất là 1. Xin vui lòng nhập lại.'
+                    'message' => 'Số lượng nhỏ nhất là 1. Xin quý khách vui lòng nhập lại số lượng.'
                 ]);
             }
 
-            $product = Product::where('id',$request->id)->first();
+            $product = $this->product->where('id',$request->id)->first();
             $quantity = $request->quantity ?? 1;
 
-            if($this->handle_cart->checkItemQuantity($product->id, $quantity) == false){
-                $message = 'Số lượng không hợp lệ, xin vui lòng nhập số lượng nhỏ hơn '. $product->quantity;
+            if($product == null){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Sản phẩm không tồn tại. Xin quý khách vui lòng tải lại trang.'
+                ]);
+            }
 
+            if($this->handle_cart->checkAvailableQuantity($product->id, $quantity) == false){
+                $message = 'Số lượng không hợp lệ, xin vui lòng nhập số lượng nhỏ hơn '. $product->quantity;
                 return response()->json([
                     'success' => false,
                     'message' => $message,
@@ -225,34 +210,29 @@ class CartController extends Controller
                 Cart::update( $rowId, $qty_incart + $quantity);
                 $message = 'Bạn đã thêm '.$quantity.' '.$product->name.' vào giỏ hàng';
             }else{
-                Cart::add($request->id, $request->name, $quantity, $request->final_price)
+                Cart::add($request->id, $product->name, $quantity, StoreManager::getFinalPrice($product))
                     ->associate('App\Model\Product');
-
                 $message = 'Bạn đã thêm '.$quantity.' '.$product->name.' vào giỏ hàng';
             }
 
             $cart_content = Cart::content();
-
             $cart_items = [];
             $content = [];
             foreach($cart_content as $item)
             {
-                $cart_items['image'] = getFeaturedImageProduct($item->model->image);
+                $cart_items['image'] = getProductImage($item->model->images);
                 $cart_items['name'] = $item->name;
                 $cart_items['qty'] = $item->qty;
                 $cart_items['price'] = presentPrice($item->price);
-
                 $content[] = $cart_items;
             }
-
-//            dd($cart_content);
 
             return response()->json([
                     'status' => 'success',
                     'message' => $message,
                     'count' => Cart::count(),
                     'subtotal' => presentPrice(Cart::subtotal()),
-                    'image' => url(getFeaturedImageProduct($product->image)),
+                    'image' => url(getProductImage($product->image)),
                     'cart_items' => $content
                 ],200);
         }else{
