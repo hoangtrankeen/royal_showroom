@@ -81,5 +81,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth:admin'], function () {
 
     Route::resource('order-status','Backend\OrderStatusController');
     Route::resource('payment-method','Backend\PaymentMethodController');
+    Route::resource('shipping-method','Backend\ShippingMethodController');
 
 });

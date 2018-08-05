@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class RoyalStoreProvider extends ServiceProvider
+class RoyalStoreServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.

@@ -179,7 +179,10 @@ return [
 
         //Royal Service
         App\Providers\RoyalHtmlServiceProvider::class,
-        App\Providers\RoyalStoreProvider::class,
+        App\Providers\RoyalStoreServiceProvider::class,
+
+        //Composer
+        App\Providers\ComposerServiceProvider::class,
 
     ],
 

@@ -235,6 +235,12 @@
                                                 <td class="product-total">{{presentPrice($item->total)}}</td>
                                             </tr>
                                         @endforeach
+
+                                        <tr>
+                                            <th class="mtext-106 cl2">Tổng</th>
+                                            <td></td>
+                                            <th class="mtext-106 cl2">{{presentPrice(Cart::subtotal())}}</th>
+                                        </tr>
                                         <tr>
                                             <th class="mtext-106 cl2">Tổng cộng</th>
                                             <td></td>
@@ -248,7 +254,7 @@
                                 <div class="place-order-wrapper p-t-30 p-b-20 p-lr-15">
                                     <div class="shipping-method">
                                         <h4 class="mtext-101 cl2 p-b-20">Phương thức thanh toán</h4>
-                                        @foreach($payments as $payment)
+                                        @foreach($payment_methods as $payment)
                                         <label for="cod">
                                             <input type="checkbox" name="payment_method" value="{{$payment->id}}" class="payment_method"/>
                                             {{$payment->name}}

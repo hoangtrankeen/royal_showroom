@@ -7,9 +7,9 @@
     background-color: rgba(255,255,255,1);
 }
 
-.top-bar , .topbar-mobile li{
-    background-color: #f5f5f5;
-}
+/*.top-bar , .topbar-mobile li{*/
+    /*background-color: #f5f5f5;*/
+/*}*/
 
 /*.main-menu > li:hover > a, .main-menu > li.active-menu > a, .sub-menu > li:hover > a,.hov-cl1:hover, .right-top-bar a:hover, .help-block{*/
     /*color: #e65540 !important;*/
@@ -94,7 +94,6 @@ color: #ffff;
 .header-cart-item-img::after{
     content: '';
 }
-
 
 /*Category page*/
 
@@ -229,6 +228,5 @@ form#content{
     .column-custom{
         width: 150px;
     }
-
 }
 

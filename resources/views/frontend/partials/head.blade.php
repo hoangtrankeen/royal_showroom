@@ -36,4 +36,7 @@
 <!--=======================================Custom Style=================================================-->
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/custom.css')}}">
 
+<!--=======================================MEGA-MENU=================================================-->
+<link rel="stylesheet" type="text/css" href="{{asset('frontend/web/mega-menu/css/mega-menu.css')}}">
+
 @yield('css')

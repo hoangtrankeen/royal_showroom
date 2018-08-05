@@ -17,4 +17,9 @@ class PaymentMethod extends Model
         return $this->hasMany('App\Model\Order');
     }
 
+    public function getAvailablePaymentMethod()
+    {
+        return PaymentMethod::where('active', 1)->get();
+    }
+
 }

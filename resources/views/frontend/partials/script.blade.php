@@ -104,4 +104,5 @@
 <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.4/dist/loadingoverlay.min.js"></script>
 <!--https://gasparesganga.com/labs/jquery-loading-overlay/#get-it-->
 
+<script  src="{{asset('frontend/web/mega-menu/js/mega-menu.js')}}"></script>
 @yield('javascript')

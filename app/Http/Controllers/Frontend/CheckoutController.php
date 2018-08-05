@@ -2,30 +2,40 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Frontend\HandleCheckoutController;
-use App\Http\Middleware\CartMiddleware;
-use App\Model\Order;
-use App\Model\OrderProduct;
-use App\Model\PaymentMethod;
-use App\Model\OrderStatus;
-//use App\Mail\OrderPlaced;
-use App\Model\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Requests\CheckoutRequest;
+use App\Http\Requests\Checkout\CheckoutRequest;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Cartalyst\Stripe\Laravel\Facades\Stripe;
-use Cartalyst\Stripe\Exception\CardErrorException;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
     protected $handle_checkout;
+    protected $payment_method;
+    protected $shipping_method;
+    protected $order_status;
+    protected $order;
+    protected $product;
+    protected $order_product;
 
-    public function __construct(HandleCheckoutController $handle_checkout)
+    public function __construct(
+        \App\Http\BusinessLayer\FrontStore\HandleCheckout $handleCheckout,
+        \App\Model\PaymentMethod $paymentMethod,
+        \App\Model\ShippingMethod $shippingMethod,
+        \App\Model\OrderStatus $orderStatus,
+        \App\Model\Order $order,
+        \App\Model\OrderProduct $product,
+        \App\Model\OrderProduct $orderProduct
+    )
     {
-            $this->handle_checkout = $handle_checkout;
+        $this->handle_checkout = $handleCheckout;
+        $this->payment_method = $paymentMethod;
+        $this->shipping_method = $shippingMethod;
+        $this->order_status = $orderStatus;
+        $this->order = $order;
+        $this->product = $product;
+        $this->order_product = $orderProduct;
     }
 
     /**
@@ -35,97 +45,54 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $payments = PaymentMethod::all();
-        return view('frontend/content/checkout/checkout')->with('payments', $payments);
+        $payment_methods = $this->payment_method->getAvailablePaymentMethod();
+        $shipping_methods = $this->shipping_method->getAvailableShippingMethod();
+        return view('frontend/content/checkout/checkout', compact('payment_methods', 'shipping_methods'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param CheckoutRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(CheckoutRequest $request)
+    protected function addToOrdersTables($request)
     {
-        $contents = Cart::content()->map(function ($item) {
-            return $item->model->slug.', '.$item->qty;
-        })->values()->toJson();
-
-        try {
-            $charge = Stripe::charges()->create([
-
-                'amount' => $this->getNumbers()->get('newTotal'),
-                'currency' => 'VND',
-                'source' => $request->stripeToken,
-                'description' => 'Order',
-                'receipt_email' => $request->email,
-                'metadata' => [
-                    'contents' => $contents,
-                    'quantity' => Cart::instance('default')->count(),
-                    'discount' => collect(session()->get('coupon'))->toJson(),
-                ],
-            ]);
-
-            $order = $this->addToOrdersTables($request, null);
-//            Mail::send(new OrderPlaced($order));
-
-            Cart::instance('default')->destroy();
-            session()->forget('coupon');
-            return redirect()->back();
-//            return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
-        } catch (CardErrorException $e) {
-            $this->addToOrdersTables($request, $e->getMessage());
-            return back()->withErrors('Error! ' . $e->getMessage());
-        }
-    }
-
-    protected function addToOrdersTables($request, $error)
-    {
-
         $delivery_date =  date('Y-m-d', strtotime($request->delivery_date));
         // Insert into orders table
-        $order = Order::create([
+        $order = $this->order->create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
-            'billing_email' => $request->email,
-            'billing_name' => $request->name,
-            'billing_address' => $request->address,
-            'billing_city' => $request->city,
-            'billing_province' => $request->province,
-            'billing_postalcode' => $request->postalcode,
-            'billing_phone' => $request->phone,
-            'billing_name_on_card' => $request->name_on_card,
-            'billing_discount' => $this->getNumbers()->get('discount'),
-            'billing_discount_code' => $this->getNumbers()->get('code'),
-            'billing_subtotal' => $this->getNumbers()->get('newSubtotal'),
-            'billing_tax' => $this->getNumbers()->get('newTax'),
-            'billing_total' => $this->getNumbers()->get('newTotal'),
+            'email' => $request->email,
+            'name' => $request->name,
+            'address' => $request->address,
+            'city' => $request->city,
+            'province' => $request->province,
+            'postalcode' => $request->postalcode,
+            'phone' => $request->phone,
             'delivery_date' => $delivery_date,
-            'payment_method' => $request->payment_method,
-            'status' => 1,
-            'error' => $error,
-        ]);
+            'customer_message' => $request->customer_message,
 
+            'discount' => $this->getNumbers()->get('discount'),
+            'discount_code' => $this->getNumbers()->get('code'),
+            'subtotal' => $this->getNumbers()->get('newSubtotal'),
+            'tax' => $this->getNumbers()->get('newTax'),
+            'total' => $this->getNumbers()->get('newTotal'),
+
+            'payment_method' => $request->payment_method,
+            'shipping_method' => $request->shipping_method,
+            'order_status' => $this->order_status->where('code','pending')->first()->id ?? null,
+        ]);
 
         // Insert into order_product table
         foreach (Cart::content() as $item) {
-
             $this->handle_checkout->updateProductQuantity($item->model->id,  $item->qty);
-
-            OrderProduct::create([
+            $this->order_product->create([
                 'order_id' => $order->id,
                 'product_id' => $item->model->id,
                 'quantity' => $item->qty,
             ]);
         }
 
-        $order = Order::find($order->id);
-
+        $order = $this->order->find($order->id);
         return $order;
     }
 
     private function getNumbers()
     {
-
         $tax = config('cart.tax') / 100;
         $discount = session()->get('coupon')['discount'] ?? 0;
         $code = session()->get('coupon')['name'] ?? null;
@@ -149,27 +116,25 @@ class CheckoutController extends Controller
             $request->session()->forget('bill');
         }
 
-        $order = $this->addToOrdersTables($request, null);
+        $order = $this->addToOrdersTables($request);
 
-        $this->sendOrderEmailAction($order);
+//        $this->sendOrderEmailAction($order);
 
         Cart::destroy();
 
         return redirect()->route('checkout.success')
             ->with([
                 'bill' => $order,
-
             ]);
-
     }
 
     public function checkoutSuccess(Request $request)
     {
-        $success = 'Đơn hàng của bạn đã được gửi đến chúng tôi. Xin cảm ơn!';
+        $success = 'Đơn hàng của của quý khách đã được gửi đến chúng tôi. Xin cảm ơn quý khách!';
         if(Session::has('bill')){
             $bill = $request->session()->get('bill');
             $order_products = $bill->products;
-            return view('frontend/checkout-success')->with('bill',$bill)->with('order_products', $order_products)->with('success', $success);
+            return view('frontend/content/checkout/checkout-success', compact('bill','order_products', 'success'));
         }else{
             return redirect()->route('cart.index');
         }

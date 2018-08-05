@@ -25,6 +25,10 @@ class Category extends Model
         return $this->belongsTo(self::class,'parent_id','id');
     }
 
+    public function children(){
+        return $this->hasMany(self::class,'parent_id','id');
+    }
+
     public function getParentCategories()
     {
         return Category::where('parent_id',0)->get();

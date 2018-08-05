@@ -72,28 +72,23 @@
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-cart-plus"></i><span>Đơn hàng</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
 						<li><a href="{{route('order.index')}}">Đơn hàng</a></li>
-					</ul>
-					<!-- /.sub-menu js__content -->
-				</li>
-			</ul>
-			<ul class="menu js__accordion">
-				<li class="current active">
-					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-cart-plus"></i><span>Trạng thái</span><span class="menu-arrow fa fa-angle-down"></span></a>
-					<ul class="sub-menu js__content">
 						<li><a href="{{route('order-status.index')}}">Trạng thái đơn hàng</a></li>
 					</ul>
 					<!-- /.sub-menu js__content -->
 				</li>
 			</ul>
+
 			<ul class="menu js__accordion">
 				<li class="current active">
-					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-cart-plus"></i><span>Phương thức</span><span class="menu-arrow fa fa-angle-down"></span></a>
+					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-cart-plus"></i><span>Sale</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
 						<li><a href="{{route('payment-method.index')}}">Phương thức thanh toán</a></li>
+						<li><a href="{{route('shipping-method.index')}}">Phương thức vận chuyển</a></li>
 					</ul>
 					<!-- /.sub-menu js__content -->
 				</li>
 			</ul>
+
 			<ul class="menu js__accordion">
 				<li class="current active">
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>Thống kê</span><span class="menu-arrow fa fa-angle-down"></span></a>

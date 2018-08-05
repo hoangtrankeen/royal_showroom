@@ -80,7 +80,7 @@
                         <ul>
                             <li>Mã đơn hàng: <strong>{{$bill->id}}</strong></li>
                             <li>Ngày đặt hàng: <strong>{{presentDate($bill->created_at)}}</strong></li>
-                            <li>Email: <strong>{{$bill->billing_email}}</strong></li>
+                            <li>Email: <strong>{{$bill->email}}</strong></li>
                             <li>Phương thức thanh toán: <strong>{{$bill->payment_methods->name}}</strong></li>
                             <li>Ngày nhận hàng: <strong>{{presentDate($bill->delivery_date)}}</strong></li>
                         </ul>
@@ -107,7 +107,7 @@
                             @endforeach
                                 <tr>
                                     <th>Tổng</th>
-                                    <td>{{presentPrice($bill->billing_total)}}</td>
+                                    <td>{{presentPrice($bill->total)}}</td>
                                 </tr>
                         </table>
                     </div>
@@ -116,19 +116,19 @@
                         <table class="table-review">
                             <tr>
                                 <td>Địa chỉ </td>
-                                <td>{{$bill->billing_address}}</td>
+                                <td>{{$bill->address}}</td>
                             </tr>
                             <tr>
                                 <td>Thành phố</td>
-                                <td>{{$bill->billing_city}}</td>
+                                <td>{{$bill->city}}</td>
                             </tr>
                             <tr>
                                 <td>Quận/ Huyện</td>
-                                <td>{{$bill->billing_province}}</td>
+                                <td>{{$bill->province}}</td>
                             </tr>
                             <tr>
                                 <td>Postal code</td>
-                                <td>{{$bill->billing_postalcode}}</td>
+                                <td>{{$bill->postalcode}}</td>
                             </tr>
                         </table>
                     </div>

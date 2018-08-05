@@ -1,269 +1,120 @@
-<!-- Header desktop -->
 <div class="container-menu-desktop">
     <!-- Topbar -->
     <div class="top-bar">
         <div class="content-topbar flex-sb-m h-full container">
             <div class="left-top-bar">
-                +84 0123456789
+                Free shipping for standard order over $100
             </div>
 
             <div class="right-top-bar flex-w h-full">
-                {{--<a href={{route('tracking.order')}} class="flex-c-m trans-04 p-lr-25">--}}
-                    {{--Tra cứu đơn hàng--}}
-                {{--</a>--}}
+                <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    Help & FAQs
+                </a>
 
-                {{--<a href="{{route('checkout')}}" class="flex-c-m trans-04 p-lr-25">--}}
-                    {{--Thanh toán--}}
-                {{--</a>--}}
+                <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    My Account
+                </a>
+
+                <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    EN
+                </a>
+
+                <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    USD
+                </a>
             </div>
         </div>
     </div>
-
-    <div class="wrap-menu-desktop">
-        <nav class="limiter-menu-desktop container">
-
-            <!-- Logo desktop -->
-            <a href="{{route('home')}}" class="logo">
-                <img src="{{asset('frontend/images/logo.png')}}" alt="IMG-LOGO">
+    <div class="menu-container wrap-menu-desktop">
+        <div class="limiter-menu-desktop container">
+            <a href="#" class="logo">
+                <img src="{{asset('frontend/images/icons/logo-01.png')}}" alt="IMG-LOGO">
             </a>
-
-            <!-- Menu desktop -->
-            <div class="menu-desktop">
-                <ul class="main-menu">
-                    <li class="active-menu">
-                        <a href="{{route('home')}}">Trang chủ</a>
+            <div class="menu menu-desktop ">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><a href="javaScript:void(0);">Danh mục sản phẩm</a>
+                        <ul>
+                            @foreach($parent_category_list as $parent)
+                            <li><a href="{{route('catalog.category',$parent->slug)}}">{{$parent->name}}</a>
+                                @if(count($parent->children))
+                                <ul>
+                                    @foreach($parent->children as $child)
+                                    <li><a href="{{route('catalog.category',$child->slug)}}">{{$child->name}}</a></li>
+                                    @endforeach
+                                </ul>
+                                @endif
+                            </li>
+                            @endforeach
+                        </ul>
                     </li>
-
-                    <li>
-                        <a href="javascript:void(0)">Danh mục sản phẩm</a>
-                        {{RenderHtml::showCategories()}}
+                    <li><a href="#">News</a>
+                        <ul>
+                            <li><a href="#">Today</a></li>
+                            <li><a href="#">Calendar</a></li>
+                            <li><a href="#">Sport</a></li>
+                        </ul>
                     </li>
-
-                    {{--<li>--}}
-                        {{--<a href="javascript:void(0)">Tin tức</a>--}}
-                        {{--{{ManagerCatalog::showTopic()}}--}}
-                    {{--</li>--}}
-
-                    {{--<li class="label1" data-label1="hot">--}}
-                        {{--<a href="{{route('promote.combo')}}"  >Bộ sưu tập</a>--}}
-                    {{--</li>--}}
-
-                    {{--<li>--}}
-                        {{--<a href="{{route('contact')}}">Liên hệ</a>--}}
-                    {{--</li>--}}
+                    <li><a href="/">Contact</a>
+                        <ul>
+                            <li><a href="#">School</a>
+                                <ul>
+                                    <li><a href="#">Lidership</a></li>
+                                    <li><a href="#">History</a></li>
+                                    <li><a href="#">Locations</a></li>
+                                    <li><a href="#">Careers</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Study</a>
+                                <ul>
+                                    <li><a href="#">Undergraduate</a></li>
+                                    <li><a href="#">Masters</a></li>
+                                    <li><a href="#">International</a></li>
+                                    <li><a href="#">Online</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Study</a>
+                                <ul>
+                                    <li><a href="#">Undergraduate</a></li>
+                                    <li><a href="#">Masters</a></li>
+                                    <li><a href="#">International</a></li>
+                                    <li><a href="#">Online</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Empty sub</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
-
             <!-- Icon header -->
             <div class="wrap-icon-header flex-w flex-r-m">
                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                     <i class="zmdi zmdi-search"></i>
                 </div>
 
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
-
-                    <ul class="main-menu">
-                        <li>
-                            <i class="zmdi zmdi-account-circle"></i>
-                            <ul class="sub-menu">
-
-                                @if(Auth::guard('web')->check())
-                                    <li>
-                                        <a href="{{route('customer.order.list')}}">Đơn hàng</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{route('customer.dashboard')}}">Tài khoản</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Đăng xuất
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-
-                                    </li>
-                                @else
-                                    {{--<li>--}}
-                                        {{--<a href="{{ route('login') }}">Đăng nhập</a>--}}
-                                    {{--</li>--}}
-
-                                    {{--<li>--}}
-                                        {{--<a href="{{ route('register') }}">Đăng kí</a>--}}
-                                    {{--</li>--}}
-                                @endif
-                            </ul>
-                        </li>
-
-
-                    </ul>
-                </div>
-
                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{Cart::count()}}">
                     <i class="zmdi zmdi-shopping-cart"></i>
                 </div>
 
-                <!--<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
                     <i class="zmdi zmdi-favorite-outline"></i>
-                </a>-->
-            </div>
-        </nav>
-    </div>
-</div>
-
-<!-- Header Mobile -->
-<div class="wrap-header-mobile">
-    <!-- Logo moblie -->
-    <div class="logo-mobile">
-        <a href="/"><img src="{{asset('frontend/images/logo.png')}}" alt="IMG-LOGO"></a>
-    </div>
-
-    <!-- Icon header -->
-    <div class="wrap-icon-header flex-w flex-r-m m-r-15">
-        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-            <i class="zmdi zmdi-search"></i>
-        </div>
-
-        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11">
-            <i class="zmdi zmdi-account-circle"></i>
-        </div>
-
-        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
-            <i class="zmdi zmdi-shopping-cart"></i>
-        </div>
-
-        <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-            <i class="zmdi zmdi-favorite-outline"></i>
-        </a>
-    </div>
-
-    <!-- Button show menu -->
-    <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-				<span class="hamburger-box">
-					<span class="hamburger-inner"></span>
-				</span>
-    </div>
-</div>
-
-
-<!-- Menu Mobile -->
-<div class="menu-mobile">
-    <ul class="topbar-mobile">
-        <li>
-            <div class="left-top-bar">
-                Free shipping for standard order over $100
-            </div>
-        </li>
-
-        <li>
-            <div class="right-top-bar flex-w h-full">
-                <a href="#" class="flex-c-m p-lr-10 trans-04">
-                    Help & FAQs
-                </a>
-
-                <a href="#" class="flex-c-m p-lr-10 trans-04">
-                    My Account
-                </a>
-
-                <a href="#" class="flex-c-m p-lr-10 trans-04">
-                    EN
-                </a>
-
-                <a href="#" class="flex-c-m p-lr-10 trans-04">
-                    USD
                 </a>
             </div>
-        </li>
-    </ul>
+            <!-- Modal Search -->
+            <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+                <div class="container-search-header">
+                    <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+                        <img src="{{asset('frontend/images/icons/icon-close2.png')}}" alt="CLOSE">
+                    </button>
 
-    <!--<ul class="main-menu-m">
-        <li>
-            <a href="index.html">Home</a>
-            <ul class="sub-menu-m">
-                <li><a href="index.html">Homepage 1</a>
-                    <ul class="sub-menu-m">
-                        <li><a href="index.html">Homepage 1</a></li>
-                        <li><a href="home-02.html">Homepage 2</a></li>
-                        <li><a href="home-03.html">Homepage 3</a></li>
-                    </ul>
-                    <span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
-                </li>
-                <li><a href="home-02.html">Homepage 2</a></li>
-                <li><a href="home-03.html">Homepage 3</a></li>
-            </ul>
-            <span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
-        </li>
-
-        <li>
-            <a href="product.html">Shop</a>
-        </li>
-
-        <li>
-            <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-        </li>
-
-        <li>
-            <a href="blog.html">Blog</a>
-        </li>
-
-        <li>
-            <a href="about.html">About</a>
-        </li>
-
-        <li>
-            <a href="contact.html">Contact</a>
-        </li>
-    </ul>-->
-
-    <ul class="main-menu-m">
-        <li>
-            <a href="{{route('home')}}">Trang chủ</a>
-        </li>
-
-        <li>
-            {{--<a href="{{route('catalog.product.all')}}">Sản phẩm</a>--}}
-            <a href="">Sản phẩm</a>
-            {{RenderHtml::showCategoriesMobile()}}
-            <span class="arrow-main-menu-m">
-				<i class="fa fa-angle-right" aria-hidden="true"></i>
-			</span>
-        </li>
-
-        <li>
-            <a href="">Blog</a>
-{{--            <a href="{{route('cms.post')}}">Blog</a>--}}
-            {{--{{RenderHtml::showTopicMobile()}}--}}
-            <span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
-        </li>
-
-        <li>
-            <a href="about.html">Showroom</a>
-        </li>
-
-        <li>
-            <a href="contact.html">Liên hệ</a>
-        </li>
-    </ul>
+                    <form class="wrap-search-header flex-w p-l-15">
+                        <button class="flex-c-m trans-04">
+                            <i class="zmdi zmdi-search"></i>
+                        </button>
+                        <input class="plh3" type="text" name="search" placeholder="Search...">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<!-- Modal Search -->
-{{--<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">--}}
-    {{--<div class="container-search-header">--}}
-        {{--<form action="{{route('catalog.search')}}" class="wrap-search-header flex-w p-l-15" method="get">--}}
-            {{--{{csrf_field()}}--}}
-            {{--<input class="plh3" type="text" name="q"  placeholder="Nhập từ khóa...">--}}
-
-            {{--<button class="flex-c-m trans-04">--}}
-                {{--<i class="zmdi zmdi-search"></i>--}}
-            {{--</button>--}}
-        {{--</form>--}}
-    {{--</div>--}}
-{{--</div>--}}

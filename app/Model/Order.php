@@ -9,9 +9,12 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'user_id', 'billing_email', 'billing_name', 'billing_address', 'billing_city',
-        'billing_province', 'billing_postalcode', 'billing_phone', 'billing_name_on_card', 'billing_discount',
-        'billing_discount_code', 'billing_subtotal', 'billing_tax', 'billing_total','delivery_date', 'error','payment_method', 'status',
+        'user_id', 'email', 'name', 'address', 'city',
+        'province', 'postalcode', 'phone',
+        'discount','discount_code',
+        'subtotal', 'tax', 'total',
+        'delivery_date','payment_method', 'shipping_method', 'status',
+        'card_name','card_number','customer_paid','customer_message','order_description'
     ];
 
     public function customer()
