@@ -9,11 +9,11 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'user_id', 'email', 'name', 'address', 'city',
+        'user_id', 'email', 'billing_name', 'address', 'city',
         'province', 'postalcode', 'phone',
         'discount','discount_code',
         'subtotal', 'tax', 'total',
-        'delivery_date','payment_method', 'shipping_method', 'status',
+        'delivery_date','payment_method_id', 'shipping_method_id', 'order_status_id',
         'card_name','card_number','customer_paid','customer_message','order_description'
     ];
 
@@ -27,14 +27,19 @@ class Order extends Model
         return $this->belongsToMany('App\Model\Product')->withPivot('quantity');
     }
 
-    public function statuses()
+    public function status()
     {
-        return $this->belongsTo('App\Model\OrderStatus', 'status');
+        return $this->belongsTo('App\Model\OrderStatus','order_status_id');
     }
 
-    public function payment_methods()
+    public function payment_method()
     {
-        return $this->belongsTo('App\Model\PaymentMethod', 'payment_method');
+        return $this->belongsTo('App\Model\PaymentMethod');
+    }
+
+    public function shipping_method()
+    {
+        return $this->belongsTo('App\Model\PaymentMethod');
     }
 
 }

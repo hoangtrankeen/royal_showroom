@@ -106,12 +106,11 @@
                     <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
                         <img src="{{asset('frontend/images/icons/icon-close2.png')}}" alt="CLOSE">
                     </button>
-
-                    <form class="wrap-search-header flex-w p-l-15">
+                    <form class="wrap-search-header flex-w p-l-15" action="{{route('catalog.search')}}">
                         <button class="flex-c-m trans-04">
                             <i class="zmdi zmdi-search"></i>
                         </button>
-                        <input class="plh3" type="text" name="search" placeholder="Search...">
+                        <input class="plh3" type="text" name="q" placeholder="Nhập từ khóa...">
                     </form>
                 </div>
             </div>

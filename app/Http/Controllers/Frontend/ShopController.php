@@ -106,40 +106,28 @@ class ShopController extends Controller
         if($product->type_id == 'group'){
             $child_id = json_decode($product->child_id);
             $child_products = $this->product->whereIn('id', $child_id)->get();
-            foreach($child_products as $product)
-            {
-                $product->final_price = Product::getFinalPrice($product);
-            }
             return view('frontend/content/catalog/product/combo-detail',compact('child_products', 'product'));
         }
 
-        return view('frontend/content/catalog/product/simple-product',compact('child_products', 'product'));
+        return view('frontend/content/catalog/product/simple-product',compact('product'));
     }
 
     public function search(Request $request)
     {
         $pagination = 9;
         $query = $request->input('q');
-        $products = Product::where('name', 'like', "%$query%")
+        $products = $this->product->where('name', 'like', "%$query%")
                             ->orWhere('sku', 'like', "%$query%");
 
-        $products = $this->_toolbar->filterCollection($products);
+        $products = $this->toolbar->filterCollection($products);
         $products = $products->paginate($pagination);
-        $data['products'] = $products;
 
         if($request->session()->has('category')){
             $request->session()->forget('category');
         }
-//        $result = [];
-//
-//        foreach ($products as $product){
-//            $result[] = [
-//                'name' => $product->name,
-//                'image' => url(getFeaturedImageProduct($product->image)),
-//                'final_price' => presentPrice(Product::getFinalPrice($product))
-//            ];
-//        }
 
-        return view('frontend/shop', $data);
+        $search_page = true;
+
+        return view('frontend/content/catalog/shop', compact('products','search_page'));
     }
 }

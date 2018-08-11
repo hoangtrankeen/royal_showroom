@@ -65,7 +65,7 @@
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                         @if(count($category->childs))
-                                            @include('backend/category/in_create',['childs' => $category->childs, 'html'=>''])
+                                            @include('backend/content/category/in_create',['childs' => $category->childs, 'html'=>''])
                                         @endif
                                     @endforeach
                                 </select>

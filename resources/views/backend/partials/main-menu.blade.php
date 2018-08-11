@@ -49,11 +49,11 @@
 			</ul>
 			<ul class="menu js__accordion">
 				<li class="current active">
-					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>Bài viết</span><span class="menu-arrow fa fa-angle-down"></span></a>
+					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>Danh mục bài viết</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
-						{{--<li><a href="{{route('post.index')}}">Bài viết</a></li>--}}
-						{{--<li><a href="{{route('topic.index')}}">Danh mục</a></li>--}}
-						{{--<li><a href="{{route('tag.index')}}">Tag</a></li>--}}
+						<li><a href="{{route('post.index')}}">Bài viết</a></li>
+						<li><a href="{{route('topic.index')}}">Danh mục</a></li>
+						<li><a href="{{route('tag.index')}}">Tag</a></li>
 					</ul>
 					<!-- /.sub-menu js__content -->
 				</li>

@@ -62,8 +62,8 @@
                             <td>{{$order->id}}</td>
                             <td>{{presentDateFormat($order->created_at)}}</td>
                             <td>{{$order->billing_name}}</td>
-                            <td>{{presentPrice($order->billing_total)}}</td>
-                            <td>{{$order->statuses->name}}</td>
+                            <td>{{presentPrice($order->total)}}</td>
+                            <td>{{$order->status->name }}</td>
                             <td>
                                 <a href="{{route('order.edit', $order->id)}}" class="btn btn-xs btn-success">Sửa</a>
                             </td>
@@ -76,7 +76,6 @@
         </div>
         <!-- /.col-xs-12 -->
     </div>
-
 @endsection
 
 @section('javascript')

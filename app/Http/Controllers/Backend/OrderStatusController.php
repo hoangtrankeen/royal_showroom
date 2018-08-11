@@ -49,7 +49,7 @@ class OrderStatusController extends Controller
     {
         $this->validate($request, [
             'name'          => 'required|string|max:255',
-            'code'          => 'required|regex:/^[a-zA-Z-]+$/u|alpha_dash|unique:order_statuses,code',
+            'code'          => 'required|regex:/^[a-zA-Z-]+$/u|alpha_dash|unique:order_status,code',
             'details'       => 'nullable|string|max:255',
             'description'   => 'nullable|string',
             'active'        => 'required|boolean'
@@ -83,7 +83,7 @@ class OrderStatusController extends Controller
     {
         $this->validate($request, [
             'name'          => 'required|string|max:255',
-            'code'          => 'required|regex:/^[a-zA-Z-]+$/u|alpha_dash|unique:order_statuses,code,'.$id,
+            'code'          => 'required|regex:/^[a-zA-Z-]+$/u|alpha_dash|unique:order_status,code,'.$id,
             'details'       => 'nullable|string|max:255',
             'description'   => 'nullable|string',
             'active'        => 'required|boolean'

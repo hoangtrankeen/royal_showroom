@@ -10,10 +10,12 @@ class Tag extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['name'];
+
     protected $guarded = [];
 
     public function posts()
     {
-        return $this->belongsToMany('App\Post','post_tag','tag_id','post_id');
+        return $this->belongsToMany('App\Model\Post','post_tag','tag_id','post_id');
     }
 }

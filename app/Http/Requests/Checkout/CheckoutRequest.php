@@ -33,8 +33,8 @@ class CheckoutRequest extends FormRequest
             'phone' => 'numeric|digits_between:9,12',
             'delivery_date' => 'required|date',
 
-            'payment_method' => 'required|integer',
-            'shipping_method' => 'nullable|integer',
+            'payment_method_id' => 'required|integer',
+            'shipping_method_id' => 'nullable|integer',
             'customer_message' => 'nullable|string|max:255'
         ];
     }

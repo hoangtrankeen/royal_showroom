@@ -29,6 +29,7 @@ Route::get('/checkout/success', 'Frontend\CheckoutController@checkoutSuccess')->
 Route::get('/category/{slug}', 'Frontend\ShopController@catalogCategory')->name('catalog.category');
 Route::get('/product/{slug}', 'Frontend\ShopController@catalogProduct')->name('catalog.product');
 Route::get('/search', 'Frontend\ShopController@search')->name('catalog.search');
+Route::get('mini-search', 'Frontend\ShopController@miniSearch')->name('mini.search');
 Route::get('/filter', 'Frontend\ShopController@filter')->name('catalog.filter');
 Route::get('/quick-view', 'Frontend\ShopController@quickView')->name('catalog.quickview');
 
@@ -78,9 +79,13 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth:admin'], function () {
     Route::resource('order','Backend\OrderController');
     Route::post('order/update/cart','Backend\OrderController@upDateCart');
 
-
     Route::resource('order-status','Backend\OrderStatusController');
     Route::resource('payment-method','Backend\PaymentMethodController');
     Route::resource('shipping-method','Backend\ShippingMethodController');
+
+    Route::resource('topic','Backend\TopicController');
+    Route::resource('post','Backend\PostController');
+    Route::resource('tag','Backend\TagController');
+
 
 });

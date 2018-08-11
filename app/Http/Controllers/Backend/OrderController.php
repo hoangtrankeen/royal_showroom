@@ -20,16 +20,17 @@ class OrderController extends Controller
 
     public function __construct(
         \App\Model\Order $order,
-        \App\Model\PaymentMethod $payment_method,
+        \App\Model\PaymentMethod $paymentMethod,
         \App\Model\Product $product,
-        \App\Model\OrderProduct $order_product,
-        \App\Model\OrderStatus $order_status
+        \App\Model\OrderProduct $orderProduct,
+        \App\Model\OrderStatus $orderStatus
     )
     {
         $this->order = $order;
-        $this->payment_method = $payment_method;
+        $this->payment_method = $paymentMethod;
         $this->product = $product;
-        $this->order_product = $order_product;
+        $this->order_product = $orderProduct;
+        $this->order_status = $orderStatus;
     }
 
     /**
@@ -39,7 +40,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = $this->order->all();
+        $orders = $this->order->has('status')->has('payment_method')->get();
         return view ('backend/content/order/index', compact('orders'));
     }
 
@@ -119,7 +120,6 @@ class OrderController extends Controller
 
     protected function addToOrdersTables($request)
     {
-
         $delivery_date =  date('Y-m-d', strtotime($request->delivery_date));
         // Insert into orders table
         $order = Order::create([
@@ -164,22 +164,10 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order = Order::find($id);
-        $data['statuses'] = OrderStatus::all();
-
+        $order = $this->order->find($id);
+        $order_status = $this->order_status->all();
         $products = $order->products;
-
-        foreach($products as $product)
-        {
-            $product->final_price = Product::getFinalPrice($product);
-        }
-
-        $data['order'] = $order;
-
-        $data['products'] = $products;
-
-
-        return view('backend/order/edit', $data);
+        return view('backend/content/order/edit', compact('order','order_status','products'));
     }
 
     /**

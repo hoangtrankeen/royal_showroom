@@ -41,47 +41,28 @@
         <div class="col-md-12 col-xs-12">
             <div class="box-content">
                 <h4 class="box-title">View Order</h4>
-                <div class="dropdown js__drop_down">
-                    <a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-                    <ul class="sub-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else there</a></li>
-                        <li class="split"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                    <!-- /.sub-menu -->
-                </div>
-                <!-- /.box-title -->
                 <div class="card-content">
-                    <form id="send-email" action="{{ route('admin.order.email') }}" method="POST" style="display: none;">
+                    <form id="send-email" action="" method="POST" style="display: none;">
                         {{ csrf_field() }}
                         <input type="hidden" name="order_id" value="{{$order->id}}">
                     </form>
 
                     <form class="form-horizontal" action="{{route('order.update', $order->id)}}" id="topic" method="post">
                         <div class="box-content">
-                            @foreach($statuses as $status)
-
-                                @if($order->statuses->id == $status->id)
+                            @foreach($order_status as $status)
+                                @if($order->status->id == $status->id)
                                     <input type="submit" class="btn btn-success" name="status_{{$status->id}}" value="{{$status->name}}">
                                 @else
                                     <input type="submit" class="btn btn-light" name="status_{{$status->id}}" value="{{$status->name}}">
                                 @endif
                             @endforeach
-
-
                             <input type="submit" class="btn btn-danger pull-right" value="Cập nhật đơn hàng">
-
-
-                            <a href="{{ route('admin.order.email') }}" class="btn btn-info pull-right"
+                            <a href="" class="btn btn-info pull-right"
                                onclick="event.preventDefault();
                                                      document.getElementById('send-email').submit();">
                                 <i class="fa fa-send-o" aria-hidden="true"></i> Gửi Email
                             </a>
-
                         </div>
-
                         {{ method_field('PUT') }}
                         {{ csrf_field() }}
                         <div class="row">
@@ -95,7 +76,7 @@
                                         </tr>
                                         <tr>
                                             <th>Trạng thái</th>
-                                            <td>{{$order->statuses->name}}</td>
+                                            <td>{{$order->status->name}}</td>
                                         </tr>
 
                                     </table>
@@ -111,7 +92,7 @@
                                         </tr>
                                         <tr>
                                             <th>Email</th>
-                                            <td>{{$order->billing_email}}</td>
+                                            <td>{{$order->email}}</td>
                                         </tr>
                                         <tr>
                                             <th>Loại</th>
@@ -119,7 +100,7 @@
                                         </tr>
                                         <tr>
                                             <th>Di động</th>
-                                            <td>{{$order->billing_phone}}</td>
+                                            <td>{{$order->phone}}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -131,24 +112,24 @@
                                         <tr>
                                             <th>Địa chỉ</th>
                                             <td>
-                                                <input type="text" name="billing_address" value="{{$order->billing_address}}">
+                                                <input type="text" name="billing_address" value="{{$order->address}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Tỉnh/Thành phố</th>
                                             <td>
-                                                <input type="text" name="billing_city" value="{{$order->billing_city}}">
+                                                <input type="text" name="billing_city" value="{{$order->city}}">
                                             </td>
                                         </tr><tr>
                                             <th>Quận/ Huyện</th>
                                             <td>
-                                                <input type="text" name="billing_province" value="{{$order->billing_province}}">
+                                                <input type="text" name="billing_province" value="{{$order->province}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Postal Code</th>
                                             <td>
-                                                <input type="text" name="billing_postalcode" value="{{$order->billing_postalcode}}">
+                                                <input type="text" name="billing_postalcode" value="{{$order->postalcode}}">
                                             </td>
                                         </tr>
 
@@ -160,7 +141,7 @@
                                     <h4 class="box-title">Phương thức thanh toán</h4>
                                     <table class="table">
                                         <tr>
-                                            <th>{{$order->payment_methods->name}}</th>
+                                            <th>{{$order->payment_method->name}}</th>
                                         </tr>
                                     </table>
                                 </div>
@@ -198,13 +179,13 @@
                                     <tr>
                                         <td>{{$product->name}}</td>
                                         <td>{{$product->pivot->quantity}}</td>
-                                        <td>{{presentPrice($product->final_price * $product->pivot->quantity)}}</td>
+                                        <td>{{presentPrice((StoreManager::getFinalPrice($product)) * $product->pivot->quantity)}}</td>
                                     </tr>
                                     @endforeach
                                     <tr>
                                         <th>Tổng</th>
                                         <td></td>
-                                        <td>{{presentPrice($order->billing_total)}}</td>
+                                        <td>{{presentPrice($order->total)}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -237,6 +218,8 @@
 @endsection
 
 @section('javascript')
+
+
     <!-- Select2 -->
     <script src="{{asset('backend/assets/plugin/select2/js/select2.min.js')}}"></script>
 
@@ -257,10 +240,10 @@
 
     <!-- Datepicker -->
     <script src="{{asset('backend/assets/plugin/datepicker/js/bootstrap-datepicker.min.js')}}"></script>
-
     <script>
         $('#datepicker').datepicker({
             date: new Date()
         });
     </script>
+
 @endsection

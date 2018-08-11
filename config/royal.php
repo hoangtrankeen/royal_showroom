@@ -13,8 +13,9 @@ return [
     */
 
     'images' => [
-        'products' => 'media/products',
-        'categories' => 'media/categories'
+        'products'      => 'media/products',
+        'categories'    => 'media/categories',
+        'posts'         => 'media/posts'
     ],
 
 ];

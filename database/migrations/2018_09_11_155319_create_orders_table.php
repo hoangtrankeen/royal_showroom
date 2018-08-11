@@ -35,9 +35,9 @@ class CreateOrdersTable extends Migration
 
             $table->string('delivery_date')->nullable();
 
-            $table->integer('shipping_method')->nullable();
-            $table->integer('payment_method')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('shipping_method_id')->nullable();
+            $table->integer('payment_method_id')->nullable();
+            $table->integer('order_status_id')->nullable();
 
 
             $table->text('customer_message')->nullable();

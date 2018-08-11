@@ -76,3 +76,16 @@ function presentDateFormat($date = '')
 
     return $date;
 }
+
+function getPostImagePath()
+{
+    return Config::get('royal.images.posts');
+}
+
+function getPostImage($image)
+{
+    if($image){
+        return '/'.getPostImagePath().'/'.$image;
+    }
+    return '';
+}

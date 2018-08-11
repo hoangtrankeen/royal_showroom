@@ -47,7 +47,8 @@ class CheckoutController extends Controller
     {
         $payment_methods = $this->payment_method->getAvailablePaymentMethod();
         $shipping_methods = $this->shipping_method->getAvailableShippingMethod();
-        return view('frontend/content/checkout/checkout', compact('payment_methods', 'shipping_methods'));
+        $free_ship = $this->shipping_method->where('code','free-ship')->first();
+        return view('frontend/content/checkout/checkout', compact('payment_methods', 'shipping_methods', 'free_ship'));
     }
 
     protected function addToOrdersTables($request)
@@ -56,7 +57,7 @@ class CheckoutController extends Controller
         // Insert into orders table
         $order = $this->order->create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
-            'email' => $request->email,
+            'billing_name' => $request->email,
             'name' => $request->name,
             'address' => $request->address,
             'city' => $request->city,
@@ -72,9 +73,9 @@ class CheckoutController extends Controller
             'tax' => $this->getNumbers()->get('newTax'),
             'total' => $this->getNumbers()->get('newTotal'),
 
-            'payment_method' => $request->payment_method,
-            'shipping_method' => $request->shipping_method,
-            'order_status' => $this->order_status->where('code','pending')->first()->id ?? null,
+            'payment_method_id' => $request->payment_method,
+            'shipping_method_id' => $request->shipping_method,
+            'order_status_id' => $this->order->status()->where('code','pending')->first()->id ?? null,
         ]);
 
         // Insert into order_product table

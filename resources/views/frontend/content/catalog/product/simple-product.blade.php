@@ -52,10 +52,12 @@
                                     <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                                     <div class="slick3 gallery-lb">
+                                        @php $i = 0; @endphp
                                         @foreach(getAllProductImages($product->images) as $image)
                                             <div class="item-slick3" data-thumb="{{$image}}">
                                                 <div class="wrap-pic-w pos-relative">
-                                                    <img src="{{$image}}" alt="IMG-PRODUCT">
+                                                    <img src="{{$image}}" alt="IMG-PRODUCT" class="product-image" id="zoom_{{$i++}}" data-zoom-image="{{$image}}">
+
                                                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{$image}}">
                                                         <i class="fa fa-expand"></i>
                                                     </a>
@@ -140,14 +142,13 @@
                                         </p>
                                     </div>
                                 </div>
-
                                 <!-- - -->
                                 <div class="tab-pane fade" id="information" role="tabpanel">
                                     <div class="row">
                                         <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                             <ul class="p-lr-28 p-lr-15-sm">
                                                 @foreach($product->attributeValue as $attr)
-                                                    @if($attr->attribute->status == 1)
+                                                    @if($attr->attribute->active == 1)
                                                     <li class="flex-w flex-t p-b-7">
                                                         <span class="stext-102 cl3 size-205">{{$attr->attribute->name}}</span>
                                                         <span class="stext-102 cl6 size-206">{{$attr->name}}</span>
@@ -251,11 +252,9 @@
 				SKU: {{$product->sku}}
 			</span>
 
-                    <span class="stext-107 cl6 p-lr-25">
-				Danh mục: @foreach($product->categories as $category){{$category->name}} @endforeach
-
-
-			</span>
+                <span class="stext-107 cl6 p-lr-25">
+				    Danh mục: @foreach($product->categories as $category){{$category->name}} @endforeach
+			    </span>
                 </div>
             </section>
         </div>
@@ -265,4 +264,13 @@
 
 @section('javascript')
 
+    <script src='{{asset('frontend/web/elevatezoom/jquery.elevatezoom.js')}}'></script>
+    <script>
+        $('#zoom_01').elevateZoom({
+            zoomType: "inner",
+            cursor: "crosshair",
+            zoomWindowFadeIn: 500,
+            zoomWindowFadeOut: 750
+        });
+    </script>
 @endsection

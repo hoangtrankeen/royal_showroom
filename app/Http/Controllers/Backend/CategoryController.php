@@ -107,6 +107,7 @@ class CategoryController extends Controller
     {
         $category = $this->category->findOrFail($id);
         $category->products()->detach();
+        $this->image_handler->deleteImage(getCategoryImagePath(), $category->image);
         $category->delete();
         Session::flash('success', 'The category was successfully deleted!');
         return redirect()->route('category.index');

@@ -49,11 +49,8 @@ class ImageHandler extends Controller
     public function updateImage($directory,$image, $old_image)
     {
         $image_name = $this->saveImage($directory, $image);
-        if($image_name){
-            $this->deleteImage($directory, $old_image);
-            return $image_name;
-        }
-        return '';
+        $this->deleteImage($directory, $old_image);
+        return $image_name;
     }
 
     public function deleteImage($directory,$old_image)

@@ -10,6 +10,8 @@ class Post extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['title','description','slug','image','post_content','meta_title','meta_desc','meta_keyword','featured','active'];
+
     protected $guarded = [];
 
     public function topics()

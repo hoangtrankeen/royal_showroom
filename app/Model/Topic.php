@@ -8,6 +8,7 @@ class Topic extends Model
 {
     protected $table = 'topics';
 
+    protected $fillable = ['name','parent_id','slug','description','active'];
     public  $primaryKey = 'id';
 
     protected $guarded = [];

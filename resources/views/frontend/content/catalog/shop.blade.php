@@ -5,7 +5,7 @@
 @section('css')
     <!--=======================================Leftnav Style=================================================-->
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/web/smartmenu/css/sm-core-css.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/web/smartmenu/css/sm-mint/sm-mint.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/web/mega-dropdown-master/css/style.css')}}">
 @endsection
 
 @section('content')
@@ -52,22 +52,266 @@
                                 Danh mục sản phẩm
                             </h4>
                         </div>
-                        <nav id="main-nav">
-                            {{RenderHtml::showLeftCategories()}}
-                        </nav>
+                        <div class="cd-dropdown-wrapper">
+                            <nav class="cd-dropdown dropdown-is-active">
+                                <h2>Title</h2>
+                                <a href="#0" class="cd-close">Close</a>
+                                <ul class="cd-dropdown-content">
+                                    <li class="has-children">
+                                        <a href="http://codyhouse.co/?p=748">Clothing</a>
+
+                                        <ul class="cd-secondary-dropdown is-hidden">
+                                            <li class="go-back"><a href="#0">Menu</a></li>
+                                            <li class="see-all"><a href="http://codyhouse.co/?p=748">All Clothing</a></li>
+                                            <li class="has-children">
+                                                <a href="http://codyhouse.co/?p=748">Accessories</a>
+
+                                                <ul class="is-hidden">
+                                                    <li class="go-back"><a href="#0">Clothing</a></li>
+                                                    <li class="see-all"><a href="http://codyhouse.co/?p=748">All Accessories</a></li>
+                                                    <li class="has-children">
+                                                        <a href="#0">Beanies</a>
+
+                                                        <ul class="is-hidden">
+                                                            <li class="go-back"><a href="#0">Accessories</a></li>
+                                                            <li class="see-all"><a href="http://codyhouse.co/?p=748">All Benies</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Caps &amp; Hats</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Gifts</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Scarves &amp; Snoods</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="has-children">
+                                                        <a href="#0">Caps &amp; Hats</a>
+
+                                                        <ul class="is-hidden">
+                                                            <li class="go-back"><a href="#0">Accessories</a></li>
+                                                            <li class="see-all"><a href="http://codyhouse.co/?p=748">All Caps &amp; Hats</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Beanies</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Caps</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Hats</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Glasses</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Gloves</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Jewellery</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Scarves</a></li>
+                                                </ul>
+                                            </li>
+
+                                            <li class="has-children">
+                                                <a href="http://codyhouse.co/?p=748">Bottoms</a>
+
+                                                <ul class="is-hidden">
+                                                    <li class="go-back"><a href="#0">Clothing</a></li>
+                                                    <li class="see-all"><a href="http://codyhouse.co/?p=748">All Bottoms</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Casual Trousers</a></li>
+                                                    <li class="has-children">
+                                                        <a href="#0">Jeans</a>
+
+                                                        <ul class="is-hidden">
+                                                            <li class="go-back"><a href="#0">Bottoms</a></li>
+                                                            <li class="see-all"><a href="http://codyhouse.co/?p=748">All Jeans</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Ripped</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Skinny</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Slim</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Straight</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="#0">Leggings</a></li>
+                                                    <li><a href="#0">Shorts</a></li>
+                                                </ul>
+                                            </li>
+
+                                            <li class="has-children">
+                                                <a href="http://codyhouse.co/?p=748">Jackets</a>
+
+                                                <ul class="is-hidden">
+                                                    <li class="go-back"><a href="#0">Clothing</a></li>
+                                                    <li class="see-all"><a href="http://codyhouse.co/?p=748">All Jackets</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Blazers</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Bomber jackets</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Denim Jackets</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Duffle Coats</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Leather Jackets</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Parkas</a></li>
+                                                </ul>
+                                            </li>
+
+                                            <li class="has-children">
+                                                <a href="http://codyhouse.co/?p=748">Tops</a>
+
+                                                <ul class="is-hidden">
+                                                    <li class="go-back"><a href="#0">Clothing</a></li>
+                                                    <li class="see-all"><a href="http://codyhouse.co/?p=748">All Tops</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Cardigans</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Coats</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Polo Shirts</a></li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Shirts</a></li>
+                                                    <li class="has-children">
+                                                        <a href="#0">T-Shirts</a>
+
+                                                        <ul class="is-hidden">
+                                                            <li class="go-back"><a href="#0">Tops</a></li>
+                                                            <li class="see-all"><a href="http://codyhouse.co/?p=748">All T-shirts</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Plain</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Print</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Striped</a></li>
+                                                            <li><a href="http://codyhouse.co/?p=748">Long sleeved</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="http://codyhouse.co/?p=748">Vests</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul> <!-- .cd-secondary-dropdown -->
+                                    </li> <!-- .has-children -->
+
+                                    <li class="has-children">
+                                        <a href="http://codyhouse.co/?p=748">Gallery</a>
+
+                                        <ul class="cd-dropdown-gallery is-hidden">
+                                            <li class="go-back"><a href="#0">Menu</a></li>
+                                            <li class="see-all"><a href="http://codyhouse.co/?p=748">Browse Gallery</a></li>
+                                            <li>
+                                                <a class="cd-dropdown-item" href="http://codyhouse.co/?p=748">
+                                                    <img src="img/img.png" alt="Product Image">
+                                                    <h3>Product #1</h3>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item" href="http://codyhouse.co/?p=748">
+                                                    <img src="img/img.png" alt="Product Image">
+                                                    <h3>Product #2</h3>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item" href="http://codyhouse.co/?p=748">
+                                                    <img src="img/img.png" alt="Product Image">
+                                                    <h3>Product #3</h3>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item" href="http://codyhouse.co/?p=748">
+                                                    <img src="img/img.png" alt="Product Image">
+                                                    <h3>Product #4</h3>
+                                                </a>
+                                            </li>
+                                        </ul> <!-- .cd-dropdown-gallery -->
+                                    </li> <!-- .has-children -->
+
+                                    <li class="has-children">
+                                        <a href="http://codyhouse.co/?p=748">Services</a>
+                                        <ul class="cd-dropdown-icons is-hidden">
+                                            <li class="go-back"><a href="#0">Menu</a></li>
+                                            <li class="see-all"><a href="http://codyhouse.co/?p=748">Browse Services</a></li>
+                                            <li>
+                                                <a class="cd-dropdown-item item-1" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #1</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-2" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #2</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-3" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #3</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-4" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #4</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-5" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #5</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-6" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #6</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-7" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #7</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-8" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #8</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-9" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #9</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-10" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #10</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-11" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #11</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="cd-dropdown-item item-12" href="http://codyhouse.co/?p=748">
+                                                    <h3>Service #12</h3>
+                                                    <p>This is the item description</p>
+                                                </a>
+                                            </li>
+
+                                        </ul> <!-- .cd-dropdown-icons -->
+                                    </li> <!-- .has-children -->
+
+                                    <li class="cd-divider">Divider</li>
+
+                                    <li><a href="http://codyhouse.co/?p=748">Page 1</a></li>
+                                    <li><a href="http://codyhouse.co/?p=748">Page 2</a></li>
+                                    <li><a href="http://codyhouse.co/?p=748">Page 3</a></li>
+                                </ul> <!-- .cd-dropdown-content -->
+                            </nav> <!-- .cd-dropdown -->
+                        </div> <!-- .cd-dropdown-wrapper -->
 
                         <div class="m-t-30">
                             <h4 class="mtext-112 cl2 p-b-33">
                                 Combo Nổi bật
                             </h4>
-
                             <ul>
                                 @foreach(StoreManager::getFeaturedProducts() as $product)
                                     <li class="flex-w flex-t p-b-30">
                                         <a href="{{route('catalog.product',['slug'=>$product->slug])}}" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
                                             <img src="{{getProductImage($product->images)}}" alt="PRODUCT" width="90" height="100">
                                         </a>
-
                                         <div class="size-215 flex-col-t p-t-8">
                                             <a href="{{route('catalog.product',['slug'=>$product->slug])}}" class="stext-116 cl8 hov-cl1 trans-04">
                                                 {{$product->name}}
@@ -84,19 +328,8 @@
                         <div class="col-md-12 col-lg-12">
                             <div class="flex-w flex-sb-m p-b-20 ">
                                 <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-
                                 </div>
                                 <div class="flex-w flex-c-m m-tb-10">
-                                    {{--<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer trans-04 m-r-8 m-tb-4">--}}
-                                        {{--<select class="sort-field ">--}}
-                                            {{--@php $sort = request()->get('sort') ?? ''; @endphp--}}
-                                            {{--<option value="best-seller" {{ $sort  == 'best-seller' ? 'selected' :'' }}>Bán chạy nhất</option>--}}
-                                            {{--<option value="low_high" {{ $sort == 'low_high' ? 'selected' :'' }}>Giá cao đến thấp</option>--}}
-                                            {{--<option value="high_low" {{ $sort == 'high_low' ? 'selected' :'' }}>Giá thấp đến cao</option>--}}
-                                            {{--<option value="name" {{ $sort == 'name' ? 'selected' :'' }}>Tên</option>--}}
-                                            {{--<option value="combo" {{ $sort == 'combo' ? 'selected' :'' }}>Combo</option>--}}
-                                        {{--</select>--}}
-                                    {{--</div>--}}
                                     <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
                                         <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
                                         <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
@@ -117,7 +350,6 @@
                                         </button>
                                         <form id="content" action="{{route('catalog.search')}}" method="get">
                                             <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="q" placeholder="Nhập từ khóa...">
-                                            {{csrf_field()}}
                                         </form>
                                     </div>
                                 </div>
@@ -132,7 +364,7 @@
 
                                             <ul>
                                                 <li class="p-b-6">
-                                                    <a href="{{url()->current() .'?sort=featured'}}}}" class="filter-link stext-106 trans-04 {{request()->get('sort') ==  'featured' ? 'filter-link-active' : ''}}">
+                                                    <a href="{{url()->current() .'?sort=featured'}}" class="filter-link stext-106 trans-04 {{request()->get('sort') ==  'featured' ? 'filter-link-active' : ''}}">
                                                         Nổi bật
                                                     </a>
                                                 </li>
@@ -165,7 +397,6 @@
                                             <div class="mtext-102 cl2 p-b-15">
                                                 {{$attribute->name}}
                                             </div>
-
                                             <ul>
                                                 @foreach($attribute->attributeValue as $val)
                                                 <li class="p-b-6">
@@ -179,7 +410,6 @@
                                         @endforeach
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         @forelse($products as $product)
@@ -188,7 +418,6 @@
                                 <div class="block2">
                                     <div class="block2-pic hov-img0">
                                         <img src="{{getProductImage($product->images)}}" alt="IMG-PRODUCT">
-
                                         <a href="#" data-value="{{$product->slug}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                             Xem nhanh
                                         </a>
@@ -199,9 +428,7 @@
                                             <a href="{{route('catalog.product',['slug' => $product->slug])}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                                 {{$product->name}}
                                             </a>
-                                            <span class="stext-105 cl3">
-									    {{presentPrice($product->final_price)}}
-								</span>
+                                            <span class="stext-105 cl3">{{presentPrice($product->final_price)}}</span>
                                         </div>
 
                                         <div class="block2-txt-child2 flex-r p-t-3">
@@ -217,7 +444,11 @@
                             <h5 class="p-l-15">Không có sản phẩm nào tại mục này</h5>
                         @endforelse
                     </div>
-                    {{ $products->appends(request()->query())->links('frontend.partials.pager.pager') }}
+                    @if(isset($search_page) )
+                        {{ $products->links('frontend.partials.pager.pager') }}
+                    @else
+                        {{ $products->appends(request()->query())->links('frontend.partials.pager.pager') }}
+                    @endif
                 </div>
             </div>
         </div>
@@ -228,6 +459,9 @@
 @section('javascript')
     <!--Lefnav-->
     <script src="{{asset('frontend/web/smartmenu/js/jquery.smartmenus.js')}}"></script>
+    <script src="{{asset('frontend/web/mega-dropdown-master/js/main.js')}}"></script>
+    <script src="{{asset('frontend/web/mega-dropdown-master/js/jquery.menu-aim.js')}}"></script>
+    <script src="{{asset('frontend/web/mega-dropdown-master/js/modernizr.js')}}"></script>
 
     <!-- SmartMenus jQuery init -->
     <script type="text/javascript">

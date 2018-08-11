@@ -87,18 +87,16 @@
                                     <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                                     <div class="slick3 gallery-lb">
-                                        @if($product->images)
-                                            @foreach(json_decode($product->images) as $image)
-                                                <div class="item-slick3" data-thumb="{{getFeaturedImageProduct($image)}}">
-                                                    <div class="wrap-pic-w pos-relative">
-                                                        <img src="{{getFeaturedImageProduct($image)}}" alt="IMG-PRODUCT">
-                                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{getFeaturedImageProduct($image)}}">
-                                                            <i class="fa fa-expand"></i>
-                                                        </a>
-                                                    </div>
+                                        @foreach(getAllProductImages($product->images) as $image)
+                                            <div class="item-slick3" data-thumb="{{$image}}">
+                                                <div class="wrap-pic-w pos-relative">
+                                                    <img src="{{$image}}" alt="IMG-PRODUCT">
+                                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{$image}}">
+                                                        <i class="fa fa-expand"></i>
+                                                    </a>
                                                 </div>
-                                            @endforeach
-                                        @endif
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +128,7 @@
                                     <table class="table-group ">
                                         <tr>
                                             <td>
-                                                <img src="{{getFeaturedImageProduct($child->image)}}" alt="" width="50">
+                                                <img src="{{getProductImage($child->images)}}" alt="" width="50">
                                             </td>
                                             <td>
                                                 <a href="{{route('catalog.product', ['slug'=> $child->slug])}}" class=" stext-103 cl2 hov-cl1 p-b-14">{{$child->name}}</a>
