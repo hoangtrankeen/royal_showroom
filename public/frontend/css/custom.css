@@ -5,6 +5,7 @@
 /********************************Override color******************************/
 .wrap-menu-desktop{
     background-color: rgba(255,255,255,1);
+    position: initial;
 }
 
 /*.top-bar , .topbar-mobile li{*/
@@ -198,7 +199,6 @@ form#content{
         border-right: none !important;
     }
 }
-
 @media (max-width: 768px){
     header{
         position: fixed;
@@ -206,11 +206,12 @@ form#content{
         z-index:2000;
         top:0;
     }
-    .flex-top{
-        margin-top: 70px;
-    }
 
+    .side-bar-shop {
+        display: none;
+    }
 }
+
 
 @media (max-width: 767px){
     .table-shopping-cart-mobile{
@@ -219,8 +220,9 @@ form#content{
     .table-shopping-cart-desktop{
         display: none;
     }
-
 }
+
+
 @media (max-width: 480px){
     .table-shopping-cart-mobile th{
         padding: 25px 10px;

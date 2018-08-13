@@ -14,7 +14,8 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('frontend/partials/header', 'App\Http\ViewComposers\ProductCategoryComposer');
+        view()->composer('*', 'App\Http\ViewComposers\ProductCategoryComposer');
+        view()->composer('frontend/partials/header', 'App\Http\ViewComposers\FeaturedProductComposer');
     }
 
     /**
