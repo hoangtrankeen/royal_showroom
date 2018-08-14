@@ -3,9 +3,7 @@
 @section('title', 'Royal')
 
 @section('css')
-    <!--=======================================Leftnav Style=================================================-->
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/web/smartmenu/css/sm-core-css.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/web/smartmenu/css/sm-mint/sm-mint.css')}}">
+
 @endsection
 
 @section('content')
@@ -211,8 +209,6 @@
 @endsection
 
 @section('javascript')
-    <script src="{{asset('frontend/web/smartmenu/js/jquery.smartmenus.js')}}"></script> <!--Lefnav-->
-    <script src="{{asset('frontend/web/smartmenu/js/jquery.smartmenus.js')}}"></script>
 
     <!-- SmartMenus jQuery init -->
     <script type="text/javascript">

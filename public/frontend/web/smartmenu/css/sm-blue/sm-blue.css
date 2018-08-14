@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700);
 .sm-blue {
   background: transparent;
-  border-radius: 8px;
+  /*border-radius: 8px;*/
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 .sm-blue a, .sm-blue a:hover, .sm-blue a:focus, .sm-blue a:active {
@@ -9,7 +9,7 @@
   /* make room for the toggle button (sub indicator) */
   padding-right: 58px;
   background: #3092c0;
-  background-image: linear-gradient(to bottom, #3298c8, #2e8cb8);
+  /*background-image: linear-gradient(to bottom, #3298c8, #2e8cb8);*/
   color: #fff;
   font-family: "PT Sans Narrow", "Arial Narrow", Arial, Helvetica, sans-serif;
   font-size: 18px;
@@ -39,7 +39,7 @@
   text-align: center;
   text-shadow: none;
   background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  /*border-radius: 4px;*/
 }
 .sm-blue a .sub-arrow::before {
   content: '+';
@@ -48,13 +48,13 @@
   content: '-';
 }
 .sm-blue > li:first-child > a, .sm-blue > li:first-child > :not(ul) a {
-  border-radius: 8px 8px 0 0;
+  /*border-radius: 8px 8px 0 0;*/
 }
 .sm-blue > li:last-child > a, .sm-blue > li:last-child > *:not(ul) a, .sm-blue > li:last-child > ul, .sm-blue > li:last-child > ul > li:last-child > a, .sm-blue > li:last-child > ul > li:last-child > *:not(ul) a, .sm-blue > li:last-child > ul > li:last-child > ul, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > a, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul {
-  border-radius: 0 0 8px 8px;
+  /*border-radius: 0 0 8px 8px;*/
 }
 .sm-blue > li:last-child > a.highlighted, .sm-blue > li:last-child > *:not(ul) a.highlighted, .sm-blue > li:last-child > ul > li:last-child > a.highlighted, .sm-blue > li:last-child > ul > li:last-child > *:not(ul) a.highlighted, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > a.highlighted, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a.highlighted, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a.highlighted, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a.highlighted, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a.highlighted, .sm-blue > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a.highlighted {
-  border-radius: 0;
+  /*border-radius: 0;*/
 }
 .sm-blue ul {
   background: #fff;
@@ -108,7 +108,7 @@
   border-top: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   /* Switch to desktop layout
   -----------------------------------------------
      These transform the menu tree from
@@ -148,7 +148,7 @@
   .sm-blue {
     background: #3092c0;
     background-image: linear-gradient(to bottom, #3298c8, #2e8cb8);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   }
   .sm-blue a, .sm-blue a:hover, .sm-blue a:focus, .sm-blue a:active, .sm-blue a.highlighted {
@@ -190,10 +190,10 @@
     display: none;
   }
   .sm-blue > li:first-child > a, .sm-blue > li:first-child > :not(ul) a {
-    border-radius: 8px 0 0 8px;
+    /*border-radius: 8px 0 0 8px;*/
   }
   .sm-blue > li:last-child > a, .sm-blue > li:last-child > :not(ul) a {
-    border-radius: 0 8px 8px 0 !important;
+    /*border-radius: 0 8px 8px 0 !important;*/
   }
   .sm-blue > li {
     border-left: 1px solid #2b82ac;
@@ -205,11 +205,11 @@
     border: 1px solid #a8a8a8;
     padding: 7px 0;
     background: #fff;
-    border-radius: 0 0 4px 4px !important;
+    /*border-radius: 0 0 4px 4px !important;*/
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
   }
   .sm-blue ul ul {
-    border-radius: 4px !important;
+    /*border-radius: 4px !important;*/
     background: #fff;
   }
   .sm-blue ul a, .sm-blue ul a:hover, .sm-blue ul a:focus, .sm-blue ul a:active, .sm-blue ul a.highlighted {
@@ -217,7 +217,7 @@
     padding: 9px 23px;
     background: transparent;
     color: #2b82ac;
-    border-radius: 0 !important;
+    /*border-radius: 0 !important;*/
   }
   .sm-blue ul a:hover, .sm-blue ul a:focus, .sm-blue ul a:active, .sm-blue ul a.highlighted {
     background: #3092c0;
@@ -280,10 +280,10 @@
     border-color: transparent #a1d1e8 transparent transparent;
   }
   .sm-blue.sm-rtl > li:first-child > a, .sm-blue.sm-rtl > li:first-child > :not(ul) a {
-    border-radius: 0 8px 8px 0;
+    /*border-radius: 0 8px 8px 0;*/
   }
   .sm-blue.sm-rtl > li:last-child > a, .sm-blue.sm-rtl > li:last-child > :not(ul) a {
-    border-radius: 8px 0 0 8px !important;
+    /*border-radius: 8px 0 0 8px !important;*/
   }
   .sm-blue.sm-rtl > li:first-child {
     border-left: 1px solid #2b82ac;
@@ -314,16 +314,16 @@
     border-color: transparent transparent transparent #a1d1e8;
   }
   .sm-blue.sm-vertical > li:first-child > a, .sm-blue.sm-vertical > li:first-child > :not(ul) a {
-    border-radius: 8px 8px 0 0;
+    /*border-radius: 8px 8px 0 0;*/
   }
   .sm-blue.sm-vertical > li:last-child > a, .sm-blue.sm-vertical > li:last-child > :not(ul) a {
-    border-radius: 0 0 8px 8px !important;
+    /*border-radius: 0 0 8px 8px !important;*/
   }
   .sm-blue.sm-vertical > li {
     border-left: 0 !important;
   }
   .sm-blue.sm-vertical ul {
-    border-radius: 4px !important;
+    /*border-radius: 4px !important;*/
   }
   .sm-blue.sm-vertical ul a {
     padding: 9px 23px;

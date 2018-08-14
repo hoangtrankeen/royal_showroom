@@ -39,4 +39,10 @@
 <!--=======================================MEGA-MENU=================================================-->
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/web/mega-menu/css/mega-menu.css')}}">
 
+<!--=======================================SMART-MENU=================================================-->
+<link rel="stylesheet" type="text/css" href="{{asset('frontend/web/smartmenu/css/sm-core-css.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('frontend/web/smartmenu/css/sm-mint/sm-mint.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('frontend/web/smartmenu/css/sm-blue/sm-blue.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('frontend/web/smartmenu/css/sm-clean/sm-clean.css')}}">
+
 @yield('css')

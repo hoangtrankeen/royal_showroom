@@ -125,55 +125,21 @@
     </div>
 </div>
 
-
 <!-- Menu Mobile -->
 <div class="menu-mobile">
-    <ul class="topbar-mobile">
-        <li>
-            <div class="left-top-bar">
-                Free shipping for standard order over $100
-            </div>
-        </li>
+    <nav class="main-nav" role="navigation">
+        <!-- Sample menu definition -->
+        <ul id="main-menu" class="sm sm-blue">
+            <li>
+                <a href="">Danh mục sản phẩm</a>
+                {{RenderHtml::showMobileCategories()}}
+            </li>
+            <li><a href="">Khuyến mại</a></li>
+            <li><a href="">Giới thiệu</a></li>
+            <li><a href="">Liên hệ</a></li>
+        </ul>
 
-        <li>
-            <div class="right-top-bar flex-w h-full">
-                <a href="#" class="flex-c-m p-lr-10 trans-04">
-                    Help & FAQs
-                </a>
-
-                <a href="#" class="flex-c-m p-lr-10 trans-04">
-                    My Account
-                </a>
-
-                <a href="#" class="flex-c-m p-lr-10 trans-04">
-                    EN
-                </a>
-
-                <a href="#" class="flex-c-m p-lr-10 trans-04">
-                    USD
-                </a>
-            </div>
-        </li>
-    </ul>
-
-    <ul class="main-menu-m">
-        <li>
-            <nav id="main-nav" >
-            </nav>
-        </li>
-
-        <li>
-            <a href="product.html">Bài viết</a>
-        </li>
-
-        <li>
-            <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Giới thiệu</a>
-        </li>
-
-        <li>
-            <a href="contact.html">Liên hệ</a>
-        </li>
-    </ul>
+    </nav>
 </div>
 
 <!-- Modal Search -->

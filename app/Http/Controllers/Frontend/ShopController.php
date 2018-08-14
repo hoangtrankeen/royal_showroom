@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Exceptions\EmptyCollectionException;
 use App\Helpers\Royal\StoreManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -56,6 +57,10 @@ class ShopController extends Controller
         $pagination = 9;
 
         $category = $this->category->where('slug',$slug)->first();
+
+        if(!count($category)){
+            throw new EmptyCollectionException;
+        }
 
         $products = $category->products();
 

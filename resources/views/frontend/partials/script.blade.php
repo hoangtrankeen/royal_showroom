@@ -104,5 +104,12 @@
 <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.4/dist/loadingoverlay.min.js"></script>
 <!--https://gasparesganga.com/labs/jquery-loading-overlay/#get-it-->
 
+<!--=======================================Mega-Menu=================================================-->
 <script  src="{{asset('frontend/web/mega-menu/js/mega-menu.js')}}"></script>
+
+<!--=======================================SmartMenu=================================================-->
+<script src="{{asset('frontend/web/smartmenu/js/jquery.smartmenus.js')}}"></script> <!--Lefnav-->
+<script src="{{asset('frontend/web/smartmenu/js/smartmenu-mobile.js')}}"></script>
+<script src="{{asset('frontend/web/smartmenu/js/smartmenu-sidebar.js')}}"></script>
+
 @yield('javascript')
