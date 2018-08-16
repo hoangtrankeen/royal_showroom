@@ -53,6 +53,14 @@ Route::get('/combo', 'Frontend\PromoteController@getCombo')->name('promote.combo
 Route::get('/tracking/order', 'Frontend\TrackingOrderController@index')->name('tracking.order');
 Route::get('/tracking/order/info', 'Frontend\TrackingOrderController@getOrderInformation')->name('tracking.order.info');
 
+//Comment System
+Route::get('{pageId}', function($pageId){
+    return view('page',['pageId' => $pageId]);
+});
+
+Route::get('comments/{pageId}', 'Frontend/CommentController@index');
+Route::post('comments', 'Frontend/CommentController@store');
+Route::post('comments/{commentId}/{type}', 'Frontend/CommentController@update');
 
 //Backend Route
 Auth::routes();
