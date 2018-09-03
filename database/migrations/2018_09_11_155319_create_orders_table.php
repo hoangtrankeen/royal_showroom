@@ -17,11 +17,11 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('email');
-            $table->string('name');
+            $table->string('billing_name');
             $table->string('address');
             $table->string('city');
-            $table->string('province');
-            $table->string('postalcode');
+            $table->string('province')->nullable();
+            $table->string('postalcode')->nullable();
             $table->string('phone');
 
             $table->string('card_name')->nullable();

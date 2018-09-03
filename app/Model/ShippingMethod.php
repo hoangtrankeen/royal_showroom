@@ -21,4 +21,9 @@ class ShippingMethod extends Model
     {
         return ShippingMethod::where('active', 1)->get();
     }
+
+    public function getDefaultShippingMethod()
+    {
+        return ShippingMethod::where('active', 1)->first()->id;
+    }
 }

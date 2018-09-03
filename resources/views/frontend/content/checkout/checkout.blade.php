@@ -3,7 +3,8 @@
 @section('title', 'Royal')
 
 @section('css')
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    <style>
+    {{--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    --}}
+    <style>
         input[type=text], input[type=password], input[type=url], input[type=tel], input[type=search], input[type=number], input[type=datetime], input[type=email] {
             background: #fff;
             border: 1px solid #ccc;
@@ -14,6 +15,23 @@
             -o-border-radius: 0;
             font-size: 13px;
             height: 40px;
+            line-height: 36px;
+            padding: 0 10px;
+            vertical-align: baseline;
+            width: 100%;
+            color: #878787;
+            box-shadow: none !important;
+        }
+
+        textarea {
+            background: #fff;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 0;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            -o-border-radius: 0;
+            font-size: 13px;
             line-height: 36px;
             padding: 0 10px;
             vertical-align: baseline;
@@ -86,15 +104,15 @@
                         <h2 class="mtext-109 cl2 p-b-30">Thông tin giao hàng</h2>
                         @if(Auth::guard('web')->check())
                             <div class="form-group">
-                                <label for="name">Họ Tên*</label>
-                                <input type="text" id="name" name="name" value="{{ Auth::guard('web')->user()->name }}" required />
-                                @if ($errors->has('name'))
-                                    <span class="help-block">{{ $errors->first('name') }}</span>
+                                <label for="billing_name">Họ Tên</label>
+                                <input type="text" id="name" name="billing_name" value="{{ Auth::guard('web')->user()->name }}" required />
+                                @if ($errors->has('billing_name'))
+                                    <span class="help-block">{{ $errors->first('billing_name') }}</span>
                                 @endif
                             </div>
 
                             <div class="form-group">
-                                <label for="email">Email*</label>
+                                <label for="email">Email</label>
                                 <input type="email" name="email" id="email" value="{{ Auth::guard('web')->user()->email }}" required />
                                 @if ($errors->has('email'))
                                     <span class="help-block"> {{ $errors->first('email') }}</span>
@@ -102,7 +120,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="phone">Số điện thoại*</label>
+                                <label for="phone">Số điện thoại</label>
                                 <input type="tel" name="phone" id="phone" value="{{ Auth::guard('web')->user()->phone }}" required />
                                 @if ($errors->has('phone'))
                                     <span class="help-block"> {{ $errors->first('phone') }}</span>
@@ -110,23 +128,23 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="city">Tỉnh/ Thành phố*</label>
+                                <label for="city">Tỉnh/ Thành phố</label>
                                 <input type="text" name="city" id="city" value="{{old('city')}}" required />
                                 @if ($errors->has('city'))
                                     <span class="help-block"> {{ $errors->first('city') }}</span>
                                 @endif
                             </div>
 
-                            <div class="form-group">
-                                <label for="province">Quận/ Huyện*</label>
-                                <input type="text" name="province" id="province" value="{{old('province')}}" required />
-                                @if ($errors->has('province'))
-                                    <span class="help-block"> {{ $errors->first('province') }}</span>
-                                @endif
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="province">Quận/ Huyện*</label>--}}
+                                {{--<input type="text" name="province" id="province" value="{{old('province')}}" required />--}}
+                                {{--@if ($errors->has('province'))--}}
+                                    {{--<span class="help-block"> {{ $errors->first('province') }}</span>--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
 
                             <div class="form-group">
-                                <label for="address">Địa chỉ nhận hàng(Số nhà, ngõ,...)*</label>
+                                <label for="address">Địa chỉ nhận hàng</label>
                                 <input type="text" name="address" id="address" value="{{old('address')}}" required />
                                 @if ($errors->has('address'))
                                     <span class="help-block"> {{ $errors->first('address') }}</span>
@@ -134,31 +152,39 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="postalcode">Postal Code</label>
-                                <input type="text" name="postalcode" id="postalcode" value="{{old('postalcode')}}" required />
-                                @if ($errors->has('postalcode'))
-                                    <span class="help-block"> {{ $errors->first('postalcode') }}</span>
+                                <label for="city">Lời nhắn</label>
+                                <textarea name="customer_message" id="customer_message" cols="30" rows="3">{{old('customer_message')}}</textarea>
+                                @if ($errors->has('customer_message'))
+                                    <span class="help-block"> {{ $errors->first('customer_message') }}</span>
                                 @endif
                             </div>
-                            <div class="form-group ">
-                                <label for="delivery_date">Ngày nhận hàng</label>
-                                <input type="text" name="delivery_date" id="delivery_date" value="{{old('delivery_date')}}" required />
 
-                                @if ($errors->has('delivery_date'))
-                                    <span class="help-block"> {{ $errors->first('delivery_date') }}</span>
-                                @endif
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="postalcode">Postal Code</label>--}}
+                                {{--<input type="text" name="postalcode" id="postalcode" value="{{old('postalcode')}}" required />--}}
+                                {{--@if ($errors->has('postalcode'))--}}
+                                    {{--<span class="help-block"> {{ $errors->first('postalcode') }}</span>--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group ">--}}
+                                {{--<label for="delivery_date">Ngày nhận hàng</label>--}}
+                                {{--<input type="text" name="delivery_date" id="delivery_date" value="{{old('delivery_date')}}" required />--}}
+
+                                {{--@if ($errors->has('delivery_date'))--}}
+                                    {{--<span class="help-block"> {{ $errors->first('delivery_date') }}</span>--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
                         @else
                             <div class="form-group">
-                                <label for="name">Họ Tên*</label>
-                                <input type="text" id="name" name="name" value="{{old('name')}}" required />
-                                @if ($errors->has('name'))
-                                    <span class="help-block">{{ $errors->first('name') }}</span>
+                                <label for="billing_name">Họ Tên</label>
+                                <input type="text" id="name" name="billing_name" value="{{old('billing_name')}}" required />
+                                @if ($errors->has('billing_name'))
+                                    <span class="help-block">{{ $errors->first('billing_name') }}</span>
                                 @endif
                             </div>
 
                             <div class="form-group">
-                                <label for="email">Email*</label>
+                                <label for="email">Email</label>
                                 <input type="email" name="email" id="email" value="{{old('email')}}" required />
                                 @if ($errors->has('email'))
                                     <span class="help-block"> {{ $errors->first('email') }}</span>
@@ -166,7 +192,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="phone">Số điện thoại*</label>
+                                <label for="phone">Số điện thoại</label>
                                 <input type="tel" name="phone" id="phone" value="{{old('phone')}}" required />
                                 @if ($errors->has('phone'))
                                     <span class="help-block"> {{ $errors->first('phone') }}</span>
@@ -174,40 +200,24 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="city">Tỉnh/ Thành phố*</label>
+                                <label for="city">Tỉnh/ Thành phố</label>
                                 <input type="text" name="city" id="city" value="{{old('city')}}" required />
                                 @if ($errors->has('city'))
                                     <span class="help-block"> {{ $errors->first('city') }}</span>
                                 @endif
                             </div>
-
                             <div class="form-group">
-                                <label for="province">Quận/ Huyện*</label>
-                                <input type="text" name="province" id="province" value="{{old('province')}}" required />
-                                @if ($errors->has('province'))
-                                    <span class="help-block"> {{ $errors->first('province') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Địa chỉ nhận hàng(Số nhà, ngõ...)*</label>
+                                <label for="address">Địa chỉ nhận hàng</label>
                                 <input type="text" name="address" id="address" value="{{old('address')}}" required />
                                 @if ($errors->has('address'))
                                     <span class="help-block"> {{ $errors->first('address') }}</span>
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label for="postalcode">Postal Code</label>
-                                <input type="text" name="postalcode" id="postalcode" value="{{old('postalcode')}}" required />
-                                @if ($errors->has('postalcode'))
-                                    <span class="help-block"> {{ $errors->first('postalcode') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group ">
-                                <label for="delivery_date">Ngày nhận hàng</label>
-                                <input type="text" name="delivery_date" id="delivery_date" value="{{old('delivery_date')}}" required />
-
-                                @if ($errors->has('delivery_date'))
-                                    <span class="help-block"> {{ $errors->first('delivery_date') }}</span>
+                                <label for="city">Lời nhắn</label>
+                                <textarea name="customer_message" id="customer_message" cols="30" rows="3">{{old('customer_message')}}</textarea>
+                                @if ($errors->has('customer_message'))
+                                    <span class="help-block"> {{ $errors->first('customer_message') }}</span>
                                 @endif
                             </div>
                         @endif
@@ -235,7 +245,6 @@
                                                 <td class="product-total">{{presentPrice($item->total)}}</td>
                                             </tr>
                                         @endforeach
-
                                         <tr>
                                             <th class="mtext-106 cl2">Giao hàng</th>
                                             <td></td>
@@ -256,20 +265,17 @@
                                         <h4 class="mtext-101 cl2 p-b-20">Phương thức thanh toán</h4>
                                         @foreach($payment_methods as $payment)
                                         <label for="cod">
-                                            <input type="checkbox" name="payment_method" value="{{$payment->id}}" class="payment_method"/>
                                             {{$payment->name}}
                                         </label>
                                         <div class="description m-t-15 m-b-20 cod-desc .trans-04" style="">
-                                            {{$payment->description}}
+
                                         </div>
                                         @endforeach
-
                                     </div>
                                     <div class="place-order-action ">
                                         <button type="submit" class="flex-c-m size-116 stext-101 cl0 size-116 bg1 bor14 hov-btn3 p-lr-15 trans-04 pointer">Thanh Toán</button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -295,11 +301,11 @@
             }
         });
 
-        $('#delivery_date').datepicker({
-            showOn: "button",
-            buttonImage: "frontend/images/icons/calendar.svg",
-            buttonImageOnly: true,
-            buttonText: "Select date"
-        });
+        // $('#delivery_date').datepicker({
+        //     showOn: "button",
+        //     buttonImage: "frontend/images/icons/calendar.svg",
+        //     buttonImageOnly: true,
+        //     buttonText: "Select date"
+        // });
     </script>
 @endsection

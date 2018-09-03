@@ -53,31 +53,24 @@ class CheckoutController extends Controller
 
     protected function addToOrdersTables($request)
     {
-        $delivery_date =  date('Y-m-d', strtotime($request->delivery_date));
         // Insert into orders table
         $order = $this->order->create([
+            'id' => 100000 + $this->order->getLastestOrder()->id,
             'user_id' => auth()->user() ? auth()->user()->id : null,
-            'billing_name' => $request->email,
-            'name' => $request->name,
+            'billing_name' => $request->billing_name,
+            'email' => $request->email,
             'address' => $request->address,
             'city' => $request->city,
-            'province' => $request->province,
-            'postalcode' => $request->postalcode,
             'phone' => $request->phone,
-            'delivery_date' => $delivery_date,
             'customer_message' => $request->customer_message,
-
-            'discount' => $this->getNumbers()->get('discount'),
-            'discount_code' => $this->getNumbers()->get('code'),
             'subtotal' => $this->getNumbers()->get('newSubtotal'),
             'tax' => $this->getNumbers()->get('newTax'),
             'total' => $this->getNumbers()->get('newTotal'),
 
-            'payment_method_id' => $request->payment_method,
-            'shipping_method_id' => $request->shipping_method,
-            'order_status_id' => $this->order->status()->where('code','pending')->first()->id ?? null,
+            'payment_method_id' => $this->payment_method->getDefaultPaymentMethod(),
+            'shipping_method_id' => $this->shipping_method->getDefaultShippingMethod(),
+            'order_status_id' => $this->order_status->getDefaultOrderStatus(),
         ]);
-
         // Insert into order_product table
         foreach (Cart::content() as $item) {
             $this->handle_checkout->updateProductQuantity($item->model->id,  $item->qty);
@@ -87,8 +80,6 @@ class CheckoutController extends Controller
                 'quantity' => $item->qty,
             ]);
         }
-
-        $order = $this->order->find($order->id);
         return $order;
     }
 
@@ -118,11 +109,8 @@ class CheckoutController extends Controller
         }
 
         $order = $this->addToOrdersTables($request);
-
-//        $this->sendOrderEmailAction($order);
-
+        $this->sendOrderEmailAction($order);
         Cart::destroy();
-
         return redirect()->route('checkout.success')
             ->with([
                 'bill' => $order,
@@ -143,29 +131,6 @@ class CheckoutController extends Controller
 
     public function sendOrderEmailAction($order)
     {
-        foreach ($order->products as $product)
-        {
-            $product->final_price = Product::getFinalPrice($product);
-        }
-        $details =[
-            'order_id' => $order->id,
-            'billing_email' => $order->billing_email,
-            'billing_name' => $order->billing_name,
-            'billing_address' => $order->billing_address,
-            'billing_city' => $order->billing_city,
-            'billing_province' => $order->billing_province,
-            'billing_postalcode' => $order->billing_postalcode,
-            'billing_phone' => $order->billing_phone,
-            'billing_total' => $order->billing_total,
-            'payment_method' => $order->payment_methods,
-            'created_at' => $order->created_at,
-            'ordered_products' => $order->products,
-            'customer' => auth()->user() ? auth()->user()->name : $order->billing_name,
-            'products' => $order->products,
-            'status' => $order->statuses->text,
-            'payment_methods' => $order->payment_methods
-        ];
-
-        Mail::to($details['billing_email'])->send(new \App\Mail\SendOrderConfirmation($details));
+        Mail::to($order->email)->send(new \App\Mail\SendOrderConfirmation($order));
     }
 }

@@ -16,4 +16,9 @@ class OrderStatus extends Model
     {
         return $this->hasMany('App\Model\Order');
     }
+
+    public function getDefaultOrderStatus()
+    {
+        return OrderStatus::where('active', 1)->first()->id;
+    }
 }

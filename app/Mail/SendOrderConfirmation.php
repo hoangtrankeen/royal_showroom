@@ -10,16 +10,16 @@ class SendOrderConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $details;
+    protected $order;
 
     /**
      * Create a new message instance.
      *
-     * @param $details
+     * @param $order
      */
-    public function __construct($details)
+    public function __construct($order)
     {
-        $this->details = $details;
+        $this->order = $order;
     }
 
     /**
@@ -29,6 +29,6 @@ class SendOrderConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->view('email.order.order-confirm')->with('details', $this->details);
+        return $this->view('frontend/content/email/order.order-confirm')->with('order', $this->order);
     }
 }

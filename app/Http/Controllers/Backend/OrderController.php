@@ -85,6 +85,18 @@ class OrderController extends Controller
         return redirect()->back()->with('success','Tạo đơn hàng thành công');
     }
 
+    /**
+     * Show the specific order
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $order = $this->order->find($id);
+        $order_status = $this->order_status->all();
+        $products = $order->products;
+        return view('backend/content/order/show', compact('order','order_status','products'));
+    }
 
     /**
      * Update the cart .

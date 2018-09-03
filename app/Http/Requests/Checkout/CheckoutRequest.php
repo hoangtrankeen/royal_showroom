@@ -25,17 +25,13 @@ class CheckoutRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'name' => 'required|string|max:255',
+            'billing_name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
-            'province' => 'required|string|max:255',
-            'postalcode' => 'required|integer',
             'phone' => 'numeric|digits_between:9,12',
-            'delivery_date' => 'required|date',
-
-            'payment_method_id' => 'required|integer',
-            'shipping_method_id' => 'nullable|integer',
-            'customer_message' => 'nullable|string|max:255'
+//            'payment_method_id' => 'nullable|integer',
+//            'shipping_method_id' => 'nullable|integer',
+//            'customer_message' => 'nullable|string|max:255'
         ];
     }
 

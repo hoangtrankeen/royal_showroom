@@ -22,4 +22,9 @@ class PaymentMethod extends Model
         return PaymentMethod::where('active', 1)->get();
     }
 
+    public function getDefaultPaymentMethod()
+    {
+        return PaymentMethod::where('active', 1)->first()->id;
+    }
+
 }

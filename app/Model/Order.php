@@ -3,13 +3,14 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
     protected $table = 'orders';
 
     protected $fillable = [
-        'user_id', 'email', 'billing_name', 'address', 'city',
+        'id','user_id', 'email', 'billing_name', 'address', 'city',
         'province', 'postalcode', 'phone',
         'discount','discount_code',
         'subtotal', 'tax', 'total',
@@ -34,12 +35,17 @@ class Order extends Model
 
     public function payment_method()
     {
-        return $this->belongsTo('App\Model\PaymentMethod');
+        return $this->belongsTo('App\Model\PaymentMethod','payment_method_id');
     }
 
     public function shipping_method()
     {
         return $this->belongsTo('App\Model\PaymentMethod');
+    }
+
+    public function getLastestOrder()
+    {
+        return DB::table('orders')->latest()->first();
     }
 
 }

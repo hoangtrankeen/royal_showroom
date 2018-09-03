@@ -141,6 +141,13 @@ form#content{
 }
 
 /*homepage*/
+
+.block1-name {
+    background: rgba(113, 127, 224,0.5);
+    color: #fff;
+    padding: 5px 10px;
+}
+
 /*Policy */
 
 .bo2{
@@ -192,6 +199,13 @@ form#content{
 .banner-wrapper-image{
     max-height: 255px;
     overflow: hidden;
+}
+
+/*Search form*/
+
+#mini-search, #search-btn {
+    position: relative;
+    transition:all 1s ease;
 }
 
 @media (min-width: 768px){

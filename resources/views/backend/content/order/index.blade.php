@@ -65,6 +65,7 @@
                             <td>{{presentPrice($order->total)}}</td>
                             <td>{{$order->status->name }}</td>
                             <td>
+                                <a href="{{route('order.show', $order->id)}}" class="btn btn-xs btn-info">Chi tiết</a>
                                 <a href="{{route('order.edit', $order->id)}}" class="btn btn-xs btn-success">Sửa</a>
                             </td>
                         </tr>

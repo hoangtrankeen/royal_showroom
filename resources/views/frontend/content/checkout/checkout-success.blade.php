@@ -81,15 +81,14 @@
                             <li>Mã đơn hàng: <strong>{{$bill->id}}</strong></li>
                             <li>Ngày đặt hàng: <strong>{{presentDate($bill->created_at)}}</strong></li>
                             <li>Email: <strong>{{$bill->email}}</strong></li>
-                            <li>Phương thức thanh toán: <strong>{{$bill->payment_methods->name}}</strong></li>
-                            <li>Ngày nhận hàng: <strong>{{presentDate($bill->delivery_date)}}</strong></li>
+                            <li>Phương thức thanh toán: <strong>{{$bill->payment_method->name}}</strong></li>
                         </ul>
                     </div>
 
 
 
                     <div class="instruction m-t-20">
-                        <p>{!!$bill->payment_methods->detail!!}</p>
+                        <p>{!!$bill->payment_method->detail!!}</p>
                     </div>
 
                     <h2 class="mtext-106 w-full p-b-20 p-t-30">Chi tiết đơn hàng</h2>
@@ -121,14 +120,6 @@
                             <tr>
                                 <td>Thành phố</td>
                                 <td>{{$bill->city}}</td>
-                            </tr>
-                            <tr>
-                                <td>Quận/ Huyện</td>
-                                <td>{{$bill->province}}</td>
-                            </tr>
-                            <tr>
-                                <td>Postal code</td>
-                                <td>{{$bill->postalcode}}</td>
                             </tr>
                         </table>
                     </div>
