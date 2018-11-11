@@ -52,7 +52,7 @@
                     <div class="p-r-45 p-r-0-lg">
                         <!--  -->
                         <div class="wrap-pic-w how-pos5-parent">
-                            <img src="{{getPostImgFeatured($post->image)}}" alt="IMG-BLOG">
+                            <img src="{{getPostImage($post->image)}}" alt="IMG-BLOG">
 
                             <div class="flex-col-c-m size-123 bg9 how-pos5">
 								<span class="ltext-107 cl2 txt-center">
@@ -85,7 +85,7 @@
                             </h4>
 
                             <p class="stext-117 cl6 p-b-26">
-                                {!! $post->content !!}
+                                {!! $post->post_content !!}
                             </p>
 
                         </div>
@@ -187,7 +187,7 @@
                             </ul>
                         </div>-->
 
-                        <div class="">
+                       {{--  <div class="">
                             <h4 class="mtext-112 cl2 p-b-33">
                                 Combo Nổi bật
                             </h4>
@@ -207,7 +207,7 @@
                                     </li>
                                @endforeach
                             </ul>
-                        </div>
+                        </div> --}}
 
                         <!--<div class="p-t-55">
                             <h4 class="mtext-112 cl2 p-b-20">

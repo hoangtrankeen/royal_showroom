@@ -27,7 +27,7 @@
     </div>
     <div class="menu-container wrap-menu-desktop">
         <div class="limiter-menu-desktop container">
-            <a href="#" class="logo">
+            <a href="/" class="logo">
                 <img src="{{asset('frontend/images/icons/logo-01.png')}}" alt="IMG-LOGO">
             </a>
             <div class="menu menu-desktop ">
@@ -49,13 +49,7 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="#">Bài viết</a>
-                        <ul>
-                            <li><a href="#">Today</a></li>
-                            <li><a href="#">Calendar</a></li>
-                            <li><a href="#">Sport</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="{{ route('cms.post') }}">Bài viết</a></li>
                     <li><a href="/">Giới thiệu</a>
                     </li>
                     <li>

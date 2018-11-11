@@ -12,13 +12,17 @@ class OrderStatus extends Model
 
     protected $fillable = ['name','code','description','details','active'];
 
+    protected $default_order_status_code = 'pending';
+
     public function orders()
     {
         return $this->hasMany('App\Model\Order');
     }
 
     public function getDefaultOrderStatus()
-    {
-        return OrderStatus::where('active', 1)->first()->id;
+    {   
+
+        return OrderStatus::where('code', 'pending') ? 
+        OrderStatus::where('code', 'pending')->first()->id : 'Order status not exist';
     }
 }

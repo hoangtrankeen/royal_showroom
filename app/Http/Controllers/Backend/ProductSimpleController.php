@@ -193,7 +193,7 @@ class ProductSimpleController extends ProductController
 
     public function copy($id)
     {
-        $product = Product::findOrFail($id);
+        $product =  $this->product->findOrFail($id);
 
         $categories = $product->categories;
 
@@ -207,16 +207,16 @@ class ProductSimpleController extends ProductController
 
         $data['product'] = $product;
 
-        $data['all_products'] = Product::getSimpleProduct();
+        $data['all_products'] =  $this->product->getSimpleProduct();
 
         $data['cat_ids'] = $cat_ids;
 
-        $data['categories'] = Category::all();
+        $data['categories'] = $this->category->all();
 
-        $data['attributes'] = Attribute::all();
+        $data['attributes'] = $this->attribute->all();
 
         if($product->type_id == 'simple'){
-            return view('backend/product/copy-simple', $data);
+            return view('backend/content/product/copy-simple', $data);
         }
 
         Session::flash('error', 'The Product Type not exist');

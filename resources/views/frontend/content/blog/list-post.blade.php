@@ -39,7 +39,7 @@
             @if($breadname)
                 <span class="stext-109 cl4">{{ $breadname}}</span>
             @else
-                <span class="stext-109 cl4">Khuyến mãi</span>
+                <span class="stext-109 cl4">Bài viết</span>
             @endif
         </div>
     </div>
@@ -55,7 +55,7 @@
 
                             <div class="p-b-63">
                                 <a href="{{route('cms.post.detail',['slug'=>$post->slug])}}" class="hov-img0 how-pos5-parent">
-                                    <img src="{{getPostImgFeatured($post->image)}}" alt="IMG-BLOG">
+                                    <img src="{{getPostImage($post->image)}}" alt="IMG-BLOG">
 
                                     <div class="flex-col-c-m size-123 bg9 how-pos5">
 									<span class="ltext-107 cl2 txt-center">
@@ -120,7 +120,7 @@
                             </button>
                         </div>-->
 
-                        <!--<div class="p-t-55">
+                        <div class="p-t-55">
                             <h4 class="mtext-112 cl2 p-b-33">
                                 Categories
                             </h4>
@@ -156,18 +156,18 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>-->
+                        </div>
 
-                        <div class="">
+                       {{--  <div class="">
                             <h4 class="mtext-112 cl2 p-b-33">
                                 Combo Nổi bật
                             </h4>
 
                             <ul>
-                                @foreach(ManagerCatalog::getFeaturedProduct() as $product)
+                                @foreach(StoreManager::getFeaturedProducts() as $product)
                                     <li class="flex-w flex-t p-b-30">
                                         <a href="{{route('catalog.product',['slug'=>$product->slug])}}" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                            <img src="{{getFeaturedImageProduct($product->image)}}" alt="PRODUCT" width="90" height="100">
+                                            <img src="{{getProductImage($product->image)}}" alt="PRODUCT" width="90" height="100">
                                         </a>
 
                                         <div class="size-215 flex-col-t p-t-8">
@@ -179,8 +179,8 @@
                                 @endforeach
                             </ul>
                         </div>
-
-                        <!--<div class="p-t-55">
+ --}}
+                        <div class="p-t-55">
                             <h4 class="mtext-112 cl2 p-b-20">
                                 Archive
                             </h4>
@@ -282,7 +282,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>-->
+                        </div>
 
                         <div class="p-t-50">
                             <h4 class="mtext-112 cl2 p-b-27">

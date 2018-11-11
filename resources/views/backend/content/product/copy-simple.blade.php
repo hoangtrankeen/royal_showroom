@@ -45,24 +45,15 @@
     <div class="row">
         <div class="col-md-12 col-xs-12">
             <div class="box-content">
-                <h4 class="box-title">Chỉnh sửa sản phẩm</h4>
-                <div class="dropdown js__drop_down">
-                    <a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-                    <ul class="sub-menu">
-                        {{--<li><a href="#">Another action</a></li>--}}
-                        {{--<li><a href="#">Something else there</a></li>--}}
-                        {{--<li class="split"></li>--}}
-                        {{--<li><a href="#">Separated link</a></li>--}}
-                    </ul>
-                    <!-- /.sub-menu -->
-                </div>
+                <h4 class="box-title">Copy sản phẩm</h4>
+
                 <!-- /.box-title -->
                 <div class="card-content">
                     <form class="form-horizontal" action="{{route('product-simple.store')}}" id="product" enctype="multipart/form-data" method="post">
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">Tên</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}">
+                                <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}"  onkeyup="ChangeToSlug('name');">
                             </div>
                         </div>
                         <div class="form-group">
@@ -77,14 +68,20 @@
                                 <input type="text" class="form-control" id="slug" name="slug" value="{{ $product->slug }}">
                             </div>
                         </div>
-
-
                         <div class="form-group">
-                            <label for="price" class="col-sm-2 control-label">Giá</label>
+                            <label for="price" class="col-sm-2 control-label">Giá niêm yết</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="price" name="price" value="{{ $product->price }}">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="discount_price" class="col-sm-2 control-label">Giá khuyến mãi</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="discount_price" name="discount_price" value="{{$product->discount_price}}">
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="quantity" class="col-sm-2 control-label">Số lượng</label>
                             <div class="col-sm-8">
@@ -120,17 +117,7 @@
                             <label for="featured" class="col-sm-2 control-label">Nổi bật</label>
                             <div class="col-xs-1">
                                 <select class="form-control" id="featured" name="featured">
-                                    <option value="0" {{$product->featured == 0 ? 'selected' : ''}} >No</option>
-                                    <option value="1" {{$product->featured == 1 ? 'selected' : ''}} >Yes</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="visibility" class="col-sm-2 control-label">Hiển thị</label>
-                            <div class="col-xs-1">
-                                <select class="form-control" id="visibility" name="visibility">
-                                    <option value="0" {{$product->visibility == 0 ? 'selected' : ''}} >No</option>
-                                    <option value="1" {{$product->visibility == 1 ? 'selected' : ''}} >Yes</option>
+                                    {!! RenderHtml::getYesNoOption($product->featured) !!}
                                 </select>
                             </div>
                         </div>
@@ -138,8 +125,7 @@
                             <label for="active" class="col-sm-2 control-label">Bật</label>
                             <div class="col-xs-1">
                                 <select class="form-control" id="active" name="active">
-                                    <option value="0" {{$product->active == 0 ? 'selected' : ''}} >No</option>
-                                    <option value="1" {{$product->active == 1 ? 'selected' : ''}} >Yes</option>
+                                    {!! RenderHtml::getYesNoOption($product->active) !!}
                                 </select>
                             </div>
                         </div>
@@ -147,30 +133,17 @@
                             <label for="in_stock" class="col-sm-2 control-label">Trong kho</label>
                             <div class="col-xs-1">
                                 <select class="form-control" id="in_stock" name="in_stock">
-                                    <option value="0" {{$product->in_stock == 0 ? 'selected' : ''}} >No</option>
-                                    <option value="1" {{$product->in_stock == 1 ? 'selected' : ''}} >Yes</option>
+                                    {!! RenderHtml::getYesNoOption($product->in_stock) !!}
                                 </select>
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <label for="images" class="col-sm-2 control-label">Ảnh nổi bật</label>
-                            <div class=" col-xs-8">
-                                <input type="file" name="image" id="file" />
-                                <img class="imageThumb" id="imageThumb" src="{{getFeaturedImageProduct($product->image)}}">
-                            </div>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="images" class="col-sm-2 control-label">Ảnh phụ</label>
+                            <label for="images" class="col-sm-2 control-label">Ảnh</label>
                             <div class=" col-xs-8">
                                 <input type="file" name="images[]" multiple  id="files" />
-                                @if($product->images)
-                                    @foreach(json_decode($product->images) as $image)
-                                        <img class="imageThumb" id="imageThumbs" src="{{getFeaturedImageProduct($image)}}">
-                                    @endforeach
-                                @endif
+                                @foreach(getAllProductImages($product->images) as $image)
+                                    <img class="imageThumb" id="imageThumbs" src="{{$image}}">
+                                @endforeach
                             </div>
                         </div>
 
@@ -187,6 +160,7 @@
                                 <input type="text" class="form-control" id="meta_title" name="meta_title" value="{{ $product->meta_title }}">
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="meta_desc" class="col-sm-2 control-label">Meta Description</label>
                             <div class="col-sm-8">
@@ -204,12 +178,12 @@
                             <div class="form-group">
                                 <label for="attribute" class="col-sm-2 control-label">{{$attribute->name}}</label>
                                 <div class="col-sm-8">
-                                    {!! ManagerCatalog::getCustomAttribute($attribute, $product)!!}
+                                    {!! RenderHtml::getCustomAttribute($attribute, $product)!!}
                                 </div>
                             </div>
                         @endforeach
-
                         <input type="hidden" class="form-control" id="type_id" name="type_id" value="simple">
+
                         {{ csrf_field() }}
                         <div class="form-group margin-bottom-0">
                             <div class="col-sm-offset-2 col-sm-8">
@@ -228,7 +202,6 @@
 @endsection
 
 @section('javascript')
-
 
     <!-- Include external JS libs. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -275,6 +248,14 @@
                 heightMin: 300
             });
         });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#name").keyup(function () {
+                ChangeToSlug('name','slug');
+            })
+        })
     </script>
 
 @endsection

@@ -72,6 +72,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth:admin'], function () {
     Route::resource('product-simple','Backend\ProductSimpleController');
     Route::resource('product-group','Backend\ProductGroupController');
     Route::resource('product','Backend\ProductController');
+    Route::get('product-simple/copy/{id}','Backend\ProductSimpleController@copy')->name('product-simple.copy');
+
 
     Route::resource('attribute','Backend\AttributeController');
     Route::resource('category','Backend\CategoryController');

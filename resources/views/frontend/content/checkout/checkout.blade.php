@@ -248,7 +248,7 @@
                                         <tr>
                                             <th class="mtext-106 cl2">Giao hàng</th>
                                             <td></td>
-                                            <th class="mtext-106 cl2">{{presentPrice($free_ship->price)}}</th>
+                                            <th class="mtext-106 cl2">{{presentPrice($shipping_method->price)}}</th>
                                         </tr>
                                         <tr>
                                             <th class="mtext-106 cl2">Tổng cộng</th>

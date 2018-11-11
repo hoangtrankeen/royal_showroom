@@ -189,7 +189,7 @@
                         <div class="form-group margin-bottom-0">
                             <div class="col-sm-offset-2 col-sm-8">
                                 <input type="submit" name="save" class="btn btn-info btn-sm waves-effect waves-light" value="Lưu">
-{{--                                <a href="{{route('product-simple.copy',$product->id)}}" class="btn btn-success btn-sm waves-effect waves-light">Copy</a>--}}
+                                <a href="{{route('product-simple.copy',$product->id)}}" class="btn btn-success btn-sm waves-effect waves-light">Copy</a>
                             </div>
                         </div>
                     </form>

@@ -46,16 +46,20 @@ class CheckoutController extends Controller
     public function index()
     {
         $payment_methods = $this->payment_method->getAvailablePaymentMethod();
-        $shipping_methods = $this->shipping_method->getAvailableShippingMethod();
-        $free_ship = $this->shipping_method->where('code','free-ship')->first();
-        return view('frontend/content/checkout/checkout', compact('payment_methods', 'shipping_methods', 'free_ship'));
+        $shipping_method = $this->shipping_method->getAvailableShippingMethod()->first();
+
+        if (!($payment_methods && $shipping_method)) {
+            return "Payment method and shipping method does not exist";
+        }
+        return view('frontend/content/checkout/checkout', compact('payment_methods', 'shipping_method'));
     }
 
     protected function addToOrdersTables($request)
     {
         // Insert into orders table
+        $last_order_id = $this->order->getLastestOrder() ? $this->order->getLastestOrder()->id : 0;
         $order = $this->order->create([
-            'id' => 100000 + $this->order->getLastestOrder()->id,
+            'id' => 100000 + $last_order_id,
             'user_id' => auth()->user() ? auth()->user()->id : null,
             'billing_name' => $request->billing_name,
             'email' => $request->email,

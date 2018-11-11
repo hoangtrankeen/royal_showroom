@@ -123,7 +123,7 @@ class PostController extends Controller
         ));
 
         $image = $this->image_handler->updateImage(getPostImagePath(), $request->image, $post->image);
-
+            
         $data = array_merge($request->all(), ['image' =>$image]);
         $post->update($data);
 
