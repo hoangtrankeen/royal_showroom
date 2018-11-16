@@ -193,31 +193,20 @@ class OrderController extends Controller
     {
         $this->validate($request, array(
             // rules, criteria
-            'billing_address' => 'required|string',
-            'billing_city' => 'required|string',
-            'billing_province' => 'required|string',
-            'billing_postalcode' => 'required|string',
-            'delivery_date' => 'required|date'
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'delivery_date' => 'nullable|date'
         ));
 
-        $order = Order::find($id);
-        $statuses = OrderStatus::all();
-        foreach($statuses as $status){
-            if($request->has('status_'.$status->id)){
-                $order->status = $status->id;
-                $order->save();
-            }
-        }
-
-        $order->billing_city = $request->billing_city;
-        $order->billing_address = $request->billing_address;
-        $order->billing_province = $request->billing_province;
-        $order->billing_postalcode = $request->billing_postalcode;
+        $order = $this->order->find($id);
+        $order->address = $request->address;
+        $order->city = $request->city;
         $order->delivery_date = $request->delivery_date;
+        $order->order_status_id = $request->order_status_id;
 
         $order->save();
 
-        return redirect()->back()->with('success', 'Order is updated successfully');
+        return redirect()->back()->with('success', 'Order đã được cập nhật thành công');
 
     }
 

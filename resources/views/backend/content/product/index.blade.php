@@ -78,7 +78,7 @@
 								<form action="{{route('product-simple.destroy', $product->id)}}" method="post">
 									{{method_field('DELETE')}}
 									{{csrf_field()}}
-									<button type="submit" class="btn btn-xs btn-danger" id="delete">Xóa</button>
+									<button type="submit" class="delete btn btn-xs btn-danger">Xóa</button>
 								</form>
 
 								@elseif($product->type_id == 'group')
@@ -86,7 +86,7 @@
 								<form action="{{route('product-group.destroy', $product->id)}}" method="post">
 									{{method_field('DELETE')}}
 									{{csrf_field()}}
-									<button type="submit" class="btn btn-xs btn-danger" id="delete">Xóa</button>
+									<button type="submit" class="delete btn btn-xs btn-danger">Xóa</button>
 								</form>
 							@endif
 						</td>

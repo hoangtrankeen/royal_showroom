@@ -265,17 +265,5 @@
             }
         });
     });
-    
-    $('input[name="q"]').on('focus',function () {
-       $("#search-btn").css({"position": "absolute", "right": "0"});
-    });
-
-    $('input[name="q"]').on('blur',function () {
-       $("#search-btn").css({"position": "relative"});
-    });
-
-
-
-
 
 })(jQuery);

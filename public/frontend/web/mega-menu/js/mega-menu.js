@@ -33,7 +33,6 @@ $(document).ready(function() {
 
     $(".menu-mobile").click(function(e) {
         $(".menu > ul").toggleClass('show-on-mobile');
-        e.preventDefault();
     });
     //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
 

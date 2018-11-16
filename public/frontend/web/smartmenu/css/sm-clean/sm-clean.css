@@ -1,6 +1,6 @@
 .sm-clean {
   background: #eeeeee;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 .sm-clean a, .sm-clean a:hover, .sm-clean a:focus, .sm-clean a:active {
   padding: 13px 20px;
@@ -14,7 +14,7 @@
   text-decoration: none;
 }
 .sm-clean a.current {
-  color: #D23600;
+  color: #007bff;
 }
 .sm-clean a.disabled {
   color: #bbbbbb;
@@ -32,7 +32,7 @@
   text-align: center;
   text-shadow: none;
   background: rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
+  border-radius: 3px;
 }
 .sm-clean a .sub-arrow::before {
   content: '+';
@@ -41,7 +41,7 @@
   content: '-';
 }
 .sm-clean > li:first-child > a, .sm-clean > li:first-child > :not(ul) a {
-  border-radius: 5px 5px 0 0;
+  border-radius: 3px 5px 0 0;
 }
 .sm-clean > li:last-child > a, .sm-clean > li:last-child > *:not(ul) a, .sm-clean > li:last-child > ul, .sm-clean > li:last-child > ul > li:last-child > a, .sm-clean > li:last-child > ul > li:last-child > *:not(ul) a, .sm-clean > li:last-child > ul > li:last-child > ul, .sm-clean > li:last-child > ul > li:last-child > ul > li:last-child > a, .sm-clean > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .sm-clean > li:last-child > ul > li:last-child > ul > li:last-child > ul, .sm-clean > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a, .sm-clean > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .sm-clean > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul, .sm-clean > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a, .sm-clean > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .sm-clean > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul {
   border-radius: 0 0 5px 5px;
@@ -135,10 +135,10 @@
     border-radius: 0 !important;
   }
   .sm-clean a:hover, .sm-clean a:focus, .sm-clean a:active, .sm-clean a.highlighted {
-    color: #D23600;
+    color: #007bff;
   }
   .sm-clean a.current {
-    color: #D23600;
+    color: #007bff;
   }
   .sm-clean a.disabled {
     color: #bbbbbb;
@@ -184,10 +184,10 @@
     border-color: transparent transparent #fff transparent;
   }
   .sm-clean ul {
-    border: 1px solid #bbbbbb;
+    border: 1px solid #e6e6e6; 
     padding: 5px 0;
     background: #fff;
-    border-radius: 5px !important;
+    border-radius: 3px !important;
     box-shadow: 0 5px 9px rgba(0, 0, 0, 0.2);
   }
   .sm-clean ul a, .sm-clean ul a:hover, .sm-clean ul a:focus, .sm-clean ul a:active, .sm-clean ul a.highlighted {
@@ -197,10 +197,10 @@
   }
   .sm-clean ul a:hover, .sm-clean ul a:focus, .sm-clean ul a:active, .sm-clean ul a.highlighted {
     background: #eeeeee;
-    color: #D23600;
+    color: #007bff;
   }
   .sm-clean ul a.current {
-    color: #D23600;
+    color: #007bff;
   }
   .sm-clean ul a.disabled {
     background: #fff;
@@ -231,10 +231,10 @@
     background: #eeeeee;
   }
   .sm-clean .scroll-up:hover .scroll-up-arrow {
-    border-color: transparent transparent #D23600 transparent;
+    border-color: transparent transparent #007bff transparent;
   }
   .sm-clean .scroll-down:hover .scroll-down-arrow {
-    border-color: #D23600 transparent transparent transparent;
+    border-color: #007bff transparent transparent transparent;
   }
   .sm-clean .scroll-up-arrow,
   .sm-clean .scroll-down-arrow {
@@ -290,7 +290,7 @@
   }
   .sm-clean.sm-vertical {
     padding: 10px 0;
-    border-radius: 5px;
+    border-radius: 3px;
   }
   .sm-clean.sm-vertical a {
     padding: 10px 20px;

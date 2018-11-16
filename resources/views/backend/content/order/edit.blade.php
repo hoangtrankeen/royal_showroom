@@ -49,13 +49,6 @@
 
                     <form class="form-horizontal" action="{{route('order.update', $order->id)}}" id="topic" method="post">
                         <div class="box-content">
-                            @foreach($order_status as $status)
-                                @if($order->status->id == $status->id)
-                                    <input type="submit" class="btn btn-success" name="status_{{$status->id}}" value="{{$status->name}}">
-                                @else
-                                    <input type="submit" class="btn btn-light" name="status_{{$status->id}}" value="{{$status->name}}">
-                                @endif
-                            @endforeach
                             <input type="submit" class="btn btn-danger pull-right" value="Cập nhật đơn hàng">
                             <a href="" class="btn btn-info pull-right"
                                onclick="event.preventDefault();
@@ -76,7 +69,15 @@
                                         </tr>
                                         <tr>
                                             <th>Trạng thái</th>
-                                            <td>{{$order->status->name}}</td>
+                                            <td>
+                                                <select class="form-control" name="order_status_id">
+                                                   @foreach ($order_status as $status)
+                                                       <option value="{{$status->id}}"
+                                                        {{$status->id === $order->status->id ? 'selected' : ''}}>
+                                                        {{$status->name}}</option>
+                                                   @endforeach
+                                                </select>
+                                            </td>
                                         </tr>
 
                                     </table>
@@ -112,27 +113,15 @@
                                         <tr>
                                             <th>Địa chỉ</th>
                                             <td>
-                                                <input type="text" name="billing_address" value="{{$order->address}}">
+                                                <input type="text" class="form-control" name="address" value="{{$order->address}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Tỉnh/Thành phố</th>
                                             <td>
-                                                <input type="text" name="billing_city" value="{{$order->city}}">
-                                            </td>
-                                        </tr><tr>
-                                            <th>Quận/ Huyện</th>
-                                            <td>
-                                                <input type="text" name="billing_province" value="{{$order->province}}">
+                                                <input type="text" name="city" class="form-control" value="{{$order->city}}">
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th>Postal Code</th>
-                                            <td>
-                                                <input type="text" name="billing_postalcode" value="{{$order->postalcode}}">
-                                            </td>
-                                        </tr>
-
                                     </table>
                                 </div>
                             </div>

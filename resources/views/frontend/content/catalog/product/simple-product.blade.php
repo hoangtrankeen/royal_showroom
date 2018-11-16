@@ -109,7 +109,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                 @endif
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -149,10 +149,10 @@
                                             <ul class="p-lr-28 p-lr-15-sm">
                                                 @foreach($product->attributeValue as $attr)
                                                     @if($attr->attribute->active == 1)
-                                                    <li class="flex-w flex-t p-b-7">
-                                                        <span class="stext-102 cl3 size-205">{{$attr->attribute->name}}</span>
-                                                        <span class="stext-102 cl6 size-206">{{$attr->name}}</span>
-                                                    </li>
+                                                        <li class="flex-w flex-t p-b-7">
+                                                            <span class="stext-102 cl3 size-205">{{$attr->attribute->name}}</span>
+                                                            <span class="stext-102 cl6 size-206">{{$attr->name}}</span>
+                                                        </li>
                                                     @endif
                                                 @endforeach
                                             </ul>
@@ -252,7 +252,7 @@
 				SKU: {{$product->sku}}
 			</span>
 
-                <span class="stext-107 cl6 p-lr-25">
+                    <span class="stext-107 cl6 p-lr-25">
 				    Danh mục: @foreach($product->categories as $category){{$category->name}} @endforeach
 			    </span>
                 </div>

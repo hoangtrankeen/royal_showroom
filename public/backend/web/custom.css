@@ -17,3 +17,7 @@
     background-color: #b4dbed;
     color: #ffffff;
 }
+
+select.form-control {
+    min-width: 70px;
+}

@@ -146,8 +146,33 @@
                                 <input type="file" name="images[]" multiple  id="files" />
                             </div>
                         </div>
-
+                        {{-- Image --}}
                         <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">Ảnh</label>
+                            <div class="col-sm-8 control-group increment offset-xs-2" >
+                                <ul class="list-inline">
+                                    <li>
+                                        <input type="file" name="filename[]" class="form-control">
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clone hide">
+                                <div class="col-sm-offset-2 col-sm-8 margin-top-10">
+                                    <ul class="list-inline">
+                                        <li><input type="file" name="filename[]" class="form-control"></li>
+                                        <li>
+                                            <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- /Image --}}
+
+                        <div class="form-group" style="clear: left">
                             <label for="sort_order" class="col-sm-2 control-label">Thứ tự</label>
                             <div class="col-sm-8">
                                 <input type="number" min="1" class="form-control" id="sort_order" name="sort_order" value="{{ old('sort_order') ? old('sort_order') : 200 }}">
@@ -254,5 +279,22 @@
                 ChangeToSlug('name','slug');
             })
         })
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $(".btn-success").click(function(){
+                var html = $(".clone").html();
+                $(".increment").after(html);
+            });
+
+            $("body").on("click",".btn-danger",function(){
+                $(this).parents(".control-group").remove();
+            });
+
+        });
+
     </script>
 @endsection

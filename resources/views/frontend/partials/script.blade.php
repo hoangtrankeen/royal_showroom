@@ -112,4 +112,7 @@
 <script src="{{asset('frontend/web/smartmenu/js/smartmenu-mobile.js')}}"></script>
 <script src="{{asset('frontend/web/smartmenu/js/smartmenu-sidebar.js')}}"></script>
 
+<!--=======================================Elevatezoom=================================================-->
+<script src="{{asset('frontend/web/elevatezoom/js/jquery.elevatezoom.js')}}"></script>
+
 @yield('javascript')

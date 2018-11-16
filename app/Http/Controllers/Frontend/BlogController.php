@@ -10,14 +10,14 @@ class BlogController extends Controller
 {      
 
     protected $post;
-    protected $category;
+    protected $topic;
 
     public function __construct(
         \App\Model\Post $post,
-        \App\Model\Topic $category
+        \App\Model\Topic $topic
     ) {
         $this->post = $post;
-        $this->category = $category;
+        $this->topic = $topic;
     }
 
     public function index(Request $request)

@@ -57,9 +57,10 @@ class CheckoutController extends Controller
     protected function addToOrdersTables($request)
     {
         // Insert into orders table
-        $last_order_id = $this->order->getLastestOrder() ? $this->order->getLastestOrder()->id : 0;
+        $last_order_id = $this->order->getLastestOrder() ? $this->order->getLastestOrder()->id : 100000;
+
         $order = $this->order->create([
-            'id' => 100000 + $last_order_id,
+            'id' => $last_order_id + 1,
             'user_id' => auth()->user() ? auth()->user()->id : null,
             'billing_name' => $request->billing_name,
             'email' => $request->email,
